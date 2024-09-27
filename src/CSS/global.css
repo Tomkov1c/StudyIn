@@ -1,19 +1,23 @@
 body.light {
     --color-primary: #DFAF6C;
+    --color-primary25: #af8955;
     --color-secondary: #82A69D;
     --color-terciary: #DBE3E9;
     --color-accent: #D39BAF;
     --color-text: #0B0F13;
+    --color-text25: #0b0f1339;
     --color-background: #E6EEF4;
     --color-good: #6CDF89;
     --color-bad: #DF6C6C;
 }
 body.dark {
     --color-primary: #926320;
+    --color-primary25: #6c4918;
     --color-secondary: #597D74;
     --color-terciary: #161E24;
     --color-accent: #632C3F;
     --color-text: #ECF0F4;
+    --color-text25: #ECF0F439;
     --color-background: #081319;
     --color-good: #429056;
     --color-bad: #9D4747;
