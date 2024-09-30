@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 body.light {
     --color-primary: #DFAF6C;
     --color-primary25: #af8955;
