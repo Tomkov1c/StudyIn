@@ -12,7 +12,7 @@ function basicButton($text, $function = null, $fullWidth = false, $additionalCla
 
     $hover = " " . $hover;
     $click = " " . $click;
-    $allClasses = $classes . ' ' . str_replace(" ", " hover:", $hover) .' ' . str_replace(" ", " active:", $click) . " " . $animations;
+    $allClasses = $classes . ' ' . str_replace(" ", " hover:", $hover). ' ' . str_replace(" ", " focus:", $hover) .' ' . str_replace(" ", " active:", $click) . " " . $animations;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";

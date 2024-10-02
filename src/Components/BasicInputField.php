@@ -3,9 +3,9 @@
 function basicInputField($placeholder, $id, $name, $fullWidth = false, $additionalClasses = "", $type = "text") {
 
     $classes = "h-[53px] justify-center items-center gap-[5px] inline-flex bg-[var(--color-background)] 
-                px-[30px] py-[15px] outline outline-[var(--color-text)] outline-2] 
+                px-[15px] py-[10px] outline outline-[var(--color-text)] outline-2] 
                 rounded-md shadow-[0px_4px_0px_3px_var(--color-text)] relative top-0 block
-                mx-0.5 placeholder-gray-500 font-sans font-medium";
+                mx-0.5 placeholder-gray-500 font-sans text-xl font-medium";
     $hover = "shadow-[0px_0px_0px_3px_var(--color-text)] top-1";
     $focus = "shadow-[0px_0px_0px_3px_var(--color-text)] top-1";
     $click = "";
