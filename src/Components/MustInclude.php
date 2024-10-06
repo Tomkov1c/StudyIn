@@ -4,6 +4,8 @@
     include "Footer.php";
     include "Header.php";
     include "Typography.php";
+    include "Display.php";
+    include "Divider.php";
 ?>
 <link rel="stylesheet" href="../CSS/global.css">
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">

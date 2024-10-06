@@ -1,13 +1,13 @@
 <?php
 
-function h1($text, $fullWidth = false, $highlightable = true) 
+function h1($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[100px] font-black font-sans";
+    $classes = "text-[var(--color-text)] text-[100px] font-black font-sans h-fit";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -20,14 +20,14 @@ function h1($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function h2($text, $fullWidth = false, $highlightable = true) 
+function h2($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[64px] font-extrabold font-sans";
+    $classes = "text-[var(--color-text)] text-[64px] font-extrabold font-sans h-fit";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -40,14 +40,14 @@ function h2($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function h3($text, $fullWidth = false, $highlightable = true) 
+function h3($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[50px] font-bold font-sans w-fill";
+    $classes = "text-[var(--color-text)] text-[50px] font-bold font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -60,14 +60,14 @@ function h3($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function h4($text, $fullWidth = false, $highlightable = true) 
+function h4($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[35px] font-semibold font-sans w-fill";
+    $classes = "text-[var(--color-text)] text-[35px] font-semibold font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -80,14 +80,14 @@ function h4($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function h5($text, $fullWidth = false, $highlightable = true) 
+function h5($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[35px] font-semibold font-sans w-fill";
+    $classes = "text-[var(--color-text)] text-[20px] font-semibold font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -100,14 +100,14 @@ function h5($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function h6($text, $fullWidth = false, $highlightable = true) 
+function h6($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[15px] font-normal font-sans w-fill";
+    $classes = "text-[var(--color-text)] text-[15px] font-normal font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -120,14 +120,14 @@ function h6($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function p($text, $fullWidth = false, $highlightable = true) 
+function p($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[15px] font-normal font-sans w-fill";
+    $classes = "text-[var(--color-text)] text-[15px] font-normal font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
@@ -140,14 +140,14 @@ function p($text, $fullWidth = false, $highlightable = true)
 
 }
 
-function caption($text, $fullWidth = false, $highlightable = true) 
+function caption($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[10px] font-light font-sans w-fill";
+    $classes = "text-[var(--color-text)] text-[10px] font-light font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
     // str_replace(" ", " hover:", " ". $hover) .' ' . str_replace(" ", " active:", " ". $click) . " "
-    $allClasses = $classes . ' ' . $animations;
+    $allClasses = $classes . ' ' . $animations . ' ' . $additionalClasses;
 
     if($fullWidth) {
         $allClasses = $allClasses . " w-full";
