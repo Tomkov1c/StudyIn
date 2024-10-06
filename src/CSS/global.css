@@ -13,6 +13,7 @@ body.light {
     --color-primary25: #af8955;
     --color-secondary: #82A69D;
     --color-terciary: #DBE3E9;
+    --color-terciary50: #dbe3e9ef;
     --color-accent: #D39BAF;
     --color-text: #0B0F13;
     --color-text25: #0b0f1339;
@@ -25,6 +26,7 @@ body.dark {
     --color-primary25: #6c4918;
     --color-secondary: #597D74;
     --color-terciary: #161E24;
+    --color-terciary50: #161E24ef;
     --color-accent: #632C3F;
     --color-text: #ECF0F4;
     --color-text25: #ECF0F439;
