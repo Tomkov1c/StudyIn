@@ -1,6 +1,6 @@
 <?php
 
-function basicInputField($placeholder, $id, $name, $fullWidth = false, $additionalClasses = "", $type = "text") {
+function basicInputField($placeholder, $id, $name, $fullWidth = false, $additionalClasses = "", $type = "text", $required = null) {
 
     $classes = "h-[53px] justify-center items-center gap-[5px] inline-flex bg-[var(--color-background)] 
                 px-[15px] py-[10px] outline outline-[var(--color-text)] outline-2] 
@@ -21,8 +21,13 @@ function basicInputField($placeholder, $id, $name, $fullWidth = false, $addition
         $allClasses = $allClasses . " " . $additionalClasses;
     }
     
+    if($required != null)
+    {
+        $required = "required";
+    } 
+
     return '
-    <input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $allClasses . '" placeholder="' . $placeholder . '">';
+    <input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $allClasses . '" placeholder="' . $placeholder . '"'. $required . '>';
 
 }
 ?>
