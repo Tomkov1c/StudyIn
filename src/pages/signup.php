@@ -14,7 +14,7 @@
                 <?php echo basicInputField("Name", "name", "name", true) ?>
                 <?php echo basicInputField("Surname", "surname", "surname", true) ?>
             </div>
-            <?php echo basicInputField("e-Mail", "email", "email", true, required: true) ?>
+            <?php echo basicInputField("e-Mail", "email", "email", true, required: true, type: "email") ?>
             <?php echo basicInputField("Password", "password", "password", true, required: true, type: "password") ?>
             <?php echo basicInputField("Confirm Password", "confpassword", "confpassword", true, required: true, type: "password") ?>
             <?php echo submitButton("Sign Up", fullWidth: true) ?>
