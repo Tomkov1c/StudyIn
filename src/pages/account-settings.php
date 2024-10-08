@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Settings</title>
-    <?php include "../components/MustInclude.php"; ?>
+    <?php 
+        include "../components/MustInclude.php"; 
+        session_start();
+        include_once '../scripts/database.php';
+        $user_id = $_SESSION['user_id'];
+        $query = "SELECT * FROM users WHERE id=?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$user_id]);
+
+        $user;
+
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch();
+        }
+
+        include "../scripts/get_pfp.php";
+
+
+    ?>
 </head>
 <body class="light bg-[var(--color-background)] overflow-x-hidden w-screen m-0 p-[75px] flex gap-[100px]">
     <div class="h-fit fixed w-[15%] p-[25px] bg-[var(--color-terciary)] rounded-md border-2 border-[#0b0f13] flex-col justify-start items-start gap-2.5 inline-flex">
@@ -22,19 +40,21 @@
         <?php echo divider(true) ?>
         <?php echo h5("Profile Picture") ?>
         <div class="self-stretch h-[249px] justify-start items-center gap-[30px] inline-flex">
-            <img class="w-[249px] h-[249px] rounded-[229px] border-2 border-[#0b0f13]" src="https://via.placeholder.com/249x249" />
+            <img class="w-[249px] h-[249px] rounded-[229px] border-2 border-[var(--color-text)]" src="<?php echo htmlspecialchars($profile_picture_path); ?>" />
             <div class="w-[245px] p-2.5 flex-col justify-center items-start gap-2.5 inline-flex">
-                <?php echo basicButton("Browse images", additionalClasses: "mb-2") ?>
-                <?php echo basicButton("Remove image",) ?>
+                <form action="../scripts/pfp_upload.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="fileToUpload" id="fileToUpload" required>
+                    <?php echo submitButton("Upload")?>
+                </form>
             </div>
         </div>
         <?php echo p("Dolorsunt autem quis tempore neque quam autem modi nobis qui id. Idculpa dolore, alias quas rem tempore vitae id rem ut! Ullammodi ad vel ad, natus elit dolor, in elit rem totam, in autem quis cumque. Adsed culpa ea, animi sint tempore nesciunt id eveniet odio lorem sit odit ipsum tempora. Ipsamid elit dolore natus facilis odio harum, odio sit. Minimaharum ea, alias illo lorem, at unde nesciunt odio tempore sint at culpa. ") ?>
         <?php echo divider() ?>
 
         <?php echo h5("Personal Information") ?>
-        <?php echo basicInputField("Name","name", "name", true) ?>
-        <?php echo basicInputField("Surname","surname", "surname", true) ?>
-        <?php echo basicInputField("School Email","semail", "semail", true) ?>
+        <?php echo basicInputField("Name","name", "name", true, value: $user['first_name']) ?>
+        <?php echo basicInputField("Surname","surname", "surname", true, value: $user['last_name']) ?>
+        <?php echo basicInputField("Phone Number","phone", "phone", true, value: $user['phone_number'], type: "tel") ?>
         <?php echo basicButton("Change", fullWidth: true) ?>
         <?php echo divider() ?>
 
