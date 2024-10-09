@@ -12,7 +12,7 @@
         }
         ?>
 </head>
-<body class="light bg-[var(--color-background)] w-screen m-0 px-[75px] flex gap-[100px] h-[100vh]">
+<body class="light bg-[var(--color-background)] w-screen m-0 px-[125px] flex gap-[100px] h-[100vh]">
     <form action="../scripts/user_insert.php" method="post" class="w-2/5 items-start gap-[15px] flex flex-col my-auto">
         <?php echo h2("Sign Up", true, false)?>
             <div class="flex flex-row gap-2.5">

@@ -6,7 +6,7 @@
     <title>StudyIn</title>
     <?php include "components/MustInclude.php"; ?>
 </head>
-<body class="light bg-[var(--color-background)] w-screen m-0 md:p-[75px] p-[25px] flex flex-col gap-[100px]">
+<body class="light bg-[var(--color-background)] w-screen m-0 md:px-[125px] px-[25px] py-[75px] flex flex-col gap-[100px]">
 
     <!-- Hero -->
     <section class="w-full md:items-start items-center inline-flex h-[80vh] gap-[10px]">

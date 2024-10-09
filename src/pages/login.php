@@ -11,7 +11,7 @@
         }
         ?>
 </head>
-<body class="light bg-[var(--color-background)] w-screen m-0 px-[75px] flex gap-[100px] h-[100vh]">
+<body class="light bg-[var(--color-background)] w-screen m-0 px-[125px] flex gap-[100px] h-[100vh]">
     <form method="post" action="../scripts/login_check.php" class="w-2/5 items-start gap-[15px] flex flex-col my-auto">
         <?php echo h2("Log In", true, false)?>
         <?php echo basicInputField("e-Mail", "email", "email", type: "email" , fullWidth: true, required: true) ?>
