@@ -14,11 +14,13 @@ if (!empty($email) && !empty($pass)) {
         
         if (sha1($pass . $salt) == $user['password']) {
             $_SESSION['user_id'] = $user['id'];
+            include "get_pfp.php";
+            $_SESSION['pfp'] = $profile_picture_path;
             header("Location: ../pages/browse.php");
             die();
         }
     }
 }
 
-header("Location: login.php");
+header("Location: ../pages/login.php");
 ?>

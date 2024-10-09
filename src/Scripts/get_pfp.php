@@ -5,9 +5,10 @@
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result) {
+    if ($result['profile_picture_path'] != null) {
         $profile_picture_path = $result['profile_picture_path'];
     } else {
-        $profile_picture_path = "../images/default_pfp.jpg";
+        $profile_picture_path = "../images/default_pfp.png";
     }
+    $_SESSION['pfp'] = $profile_picture_path;
 ?>

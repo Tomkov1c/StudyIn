@@ -6,8 +6,8 @@
     <title>Account Settings</title>
     <?php 
         include "../components/MustInclude.php"; 
-        session_start();
         include_once '../scripts/database.php';
+        session_start();
         $user_id = $_SESSION['user_id'];
         $query = "SELECT * FROM users WHERE id=?";
         $stmt = $pdo->prepare($query);
@@ -24,15 +24,13 @@
 
     ?>
 </head>
-<body class="light bg-[var(--color-background)] overflow-x-hidden w-screen m-0 p-[75px] flex gap-[100px]">
-    <div class="h-fit fixed w-[15%] p-[25px] bg-[var(--color-terciary)] rounded-md border-2 border-[#0b0f13] flex-col justify-start items-start gap-2.5 inline-flex">
+<body class="light bg-[var(--color-background)] overflow-x-hidden w-screen m-0 md:p-[75px] p-[25px] flex gap-[100px]">
+    <div class="lg:flex hidden h-fit fixed lg:w-[20%] w-[0%] p-[25px] bg-[var(--color-terciary)] rounded-md border-2 border-[#0b0f13] flex-col justify-start items-start gap-2.5">
         <?php echo h5("Table of Contents")?>
-        <?php echo basicButton("Lorem", fullWidth: true, additionalClasses: "my-1") ?>
-        <?php echo basicButton("Lorem", fullWidth: true, additionalClasses: "my-1") ?>
-        <?php echo basicButton("Lorem", fullWidth: true, additionalClasses: "my-1") ?>
-        <?php echo basicButton("Lorem", fullWidth: true, additionalClasses: "my-1") ?>
+        <?php echo indexButton("Account Information", fullWidth: true, additionalClasses: "my-1") ?>
+        <?php echo indexButton("Miscellaneous", fullWidth: true, additionalClasses: "my-1") ?>
     </div>
-    <div class=" flex-col w-[80%] ml-auto mr-0 justify-start items-start gap-5 inline-flex">
+    <div class=" flex-col lg:w-[75%] w-fill ml-auto mr-0 justify-start items-start gap-5 inline-flex">
         <?php echo h3("Settings") ?>
         <?php echo p("Adelit quo, vero neque, eos amet totam quae tempora ut quis sed ratione. Eosvel ipsa alias ipsa lorem tempora, natus minima iusto odit ipsum, rem laborum iusto quam ut. Animilibero aut nobis, dolore quae neque, odio tempora vel, ut sunt ut quae, iusto. Etfacilis velit laborum ut qui totam vero facilis alias sed quam nobis odit facilis at. ") ?>
         <?php echo divider() ?>
@@ -42,20 +40,24 @@
         <div class="self-stretch h-[249px] justify-start items-center gap-[30px] inline-flex">
             <img class="w-[249px] h-[249px] rounded-[229px] border-2 border-[var(--color-text)]" src="<?php echo htmlspecialchars($profile_picture_path); ?>" />
             <div class="w-[245px] p-2.5 flex-col justify-center items-start gap-2.5 inline-flex">
-                <form action="../scripts/pfp_upload.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="fileToUpload" id="fileToUpload" required>
-                    <?php echo submitButton("Upload")?>
+                <form id="submitForum" action="../scripts/pfp_upload.php" method="post" enctype="multipart/form-data" class="w-full">
+                    <input type="file" name="fileToUpload" class="hidden" id="fileToUpload" required>
+                    <p id="fileName" class="hidden"></p>
+                    <?php echo basicButton("Select File", id: "customButton", additionalClasses:"mb-4", fullWidth: true) ?>
                 </form>
+                <?php echo basicButton("Remove image", href: "../scripts/remove_pfp.php", fullWidth: true)?>
             </div>
         </div>
         <?php echo p("Dolorsunt autem quis tempore neque quam autem modi nobis qui id. Idculpa dolore, alias quas rem tempore vitae id rem ut! Ullammodi ad vel ad, natus elit dolor, in elit rem totam, in autem quis cumque. Adsed culpa ea, animi sint tempore nesciunt id eveniet odio lorem sit odit ipsum tempora. Ipsamid elit dolore natus facilis odio harum, odio sit. Minimaharum ea, alias illo lorem, at unde nesciunt odio tempore sint at culpa. ") ?>
         <?php echo divider() ?>
 
         <?php echo h5("Personal Information") ?>
-        <?php echo basicInputField("Name","name", "name", true, value: $user['first_name']) ?>
-        <?php echo basicInputField("Surname","surname", "surname", true, value: $user['last_name']) ?>
-        <?php echo basicInputField("Phone Number","phone", "phone", true, value: $user['phone_number'], type: "tel") ?>
-        <?php echo basicButton("Change", fullWidth: true) ?>
+        <form action="../scripts/user_update_info.php" method="post" class="gap-[30px] inline-flex flex-col w-full">
+            <?php echo basicInputField("Name","name", "name", true, value: $user['first_name']) ?>
+            <?php echo basicInputField("Surname","surname", "surname", true, value: $user['last_name']) ?>
+            <?php echo basicInputField("Phone Number","phone", "phone", true, value: $user['phone_number'], type: "tel") ?>
+            <?php echo submitButton("Change", fullWidth: true) ?>
+        </form>
         <?php echo divider() ?>
 
         <?php echo h5("Change Email") ?>
@@ -79,4 +81,5 @@
         <?php echo basicButton("Delete Account", fullWidth: true, additionalClasses: "bg-[var(--color-bad)]") ?>
     </div>
 </body>
+<script src="../scripts/fileInput.js"></script>
 </html> 

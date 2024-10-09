@@ -1,5 +1,7 @@
 <?php
     include "SubmitButton.php";
+    include "IconButton.php";
+    include "IndexButton.php";
     include "FileButton.php";
     include "BasicButton.php";
     include "BasicInputField.php";

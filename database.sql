@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2024 at 05:09 PM
+-- Generation Time: Oct 08, 2024 at 10:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -320,11 +320,18 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
-  `first_name` text DEFAULT NULL,
-  `last_name` text DEFAULT NULL,
+  `first_name` text NOT NULL,
+  `last_name` text NOT NULL,
   `profile_picture_path` text DEFAULT NULL,
   `phone_number` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `profile_picture_path`, `phone_number`) VALUES
+(6, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Test', 'Tom', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -439,7 +446,7 @@ ALTER TABLE `schools`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users_courses`

@@ -1,6 +1,6 @@
 <?php
 
-function basicButton($text, $function = null, $fullWidth = false, $additionalClasses = "", $href = null, $id = null) {
+function iconButton($icon, $function = null, $fullWidth = false, $additionalClasses = "", $href = null, $id = null) {
 
     $classes = "justify-center items-center gap-[5px] inline-flex bg-[var(--color-primary)] 
                 px-[30px] py-[10px] outline outline-[var(--color-text)] outline-2] 
@@ -24,11 +24,11 @@ function basicButton($text, $function = null, $fullWidth = false, $additionalCla
     
     if($href == null) {
         return '
-        <button class="' . $allClasses . '" onclick="' . $function . '" ' . 'id="' . $id . '" ' . '>' . $text .'</button>
+        <button class="' . $allClasses . '" onclick="' . $function . '" ' . 'id="' . $id . '" ' . '><i class="' . $icon .'"></i></button>
         ';
     }else if ($href != null) {
         return '
-        <a class="' . $allClasses . '" onclick="' . $function . '" href= "' . $href . '">' . $text .'</a>
+        <a class="' . $allClasses . '" onclick="' . $function . '" href= "' . $href . '"><i class="' . $icon .'"></i></a>
         ';
     }else {
         return "error";

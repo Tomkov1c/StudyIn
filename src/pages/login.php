@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
-    <?php include "../components/MustInclude.php";?>
+    <?php include "../components/MustInclude.php";
+        session_start();
+        if(isset($_SESSION['user_id'])) {
+           header("Location: ../pages/browse.php"); 
+        }
+        ?>
 </head>
 <body class="light bg-[var(--color-background)] w-screen m-0 px-[75px] flex gap-[100px] h-[100vh]">
     <form method="post" action="../scripts/login_check.php" class="w-2/5 items-start gap-[15px] flex flex-col my-auto">
