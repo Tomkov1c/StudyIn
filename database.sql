@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2024 at 10:45 PM
+-- Generation Time: Oct 09, 2024 at 02:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,14 @@ CREATE TABLE `city` (
   `post_code` text NOT NULL,
   `county_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`id`, `name`, `post_code`, `county_id`) VALUES
+(1, 'Velenje', '3320', 187),
+(2, 'Celje', '3000', 187);
 
 -- --------------------------------------------------------
 
@@ -295,6 +303,13 @@ CREATE TABLE `course` (
   `details_page_content` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`id`, `name`, `school_id`, `school_year`, `website`, `details_page_content`) VALUES
+(2, 'Tehnik Računalništva', 1, '2024/2025', 'https://ers.scv.si/', 'echo p(\"The Computer Technician Program at Elektro in Računalniška Šola is designed to equip students with the essential skills and knowledge needed for a successful career in the field of information technology. This program combines theoretical education with hands-on experience, preparing students for various roles in the IT industry.\", false, true);\n\necho h2(\"Program Overview\");\n\necho p(\"The curriculum covers a wide range of topics, including computer hardware, software development, networking, and cybersecurity. Students are introduced to programming languages, database management, and system administration, providing a strong foundation in both the technical and practical aspects of computing.\", false, true);\n\necho h3(\"Practical Training\");\n\necho p(\"A key feature of the program is its emphasis on practical training. Students participate in lab work and real-world projects, where they can apply their classroom knowledge to solve problems, design systems, and troubleshoot technical issues. This hands-on approach ensures that graduates are job-ready and able to adapt to the rapidly evolving tech industry.\", false, true);\n\necho h4(\"Career Opportunities\");\n\necho p(\"Graduates of the Computer Technician Program are well-prepared to enter a variety of roles, such as IT support, system administration, network management, and software development. The program also provides a solid foundation for those wishing to continue their education in specialized IT fields or pursue higher-level certifications.\", false, true);\n');
+
 -- --------------------------------------------------------
 
 --
@@ -307,8 +322,18 @@ CREATE TABLE `schools` (
   `adress` text NOT NULL,
   `city_id` int(11) NOT NULL,
   `website` text DEFAULT NULL,
-  `custome` tinyint(1) NOT NULL DEFAULT 0
+  `custome` tinyint(1) NOT NULL DEFAULT 0,
+  `school_image_path` text NOT NULL,
+  `details_page_content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `schools`
+--
+
+INSERT INTO `schools` (`id`, `name`, `adress`, `city_id`, `website`, `custome`, `school_image_path`, `details_page_content`) VALUES
+(1, 'Šolski Center Velenje, Elektro in Računalniška Šola', 'Trg mladosti 3', 1, NULL, 0, 'https://www.scv.si/wp-content/uploads/2024/07/D_ERS-1.jpg', ''),
+(2, 'Šolski Center Velenje, Gimnazija Velenje', 'Trg mladosti 3', 1, NULL, 0, 'https://evropskasredstva.si/app/uploads/2024/07/Solski-center-Velenje-gimnazija.jpg', 'echo p(\"Gimnazija Velenje is a well-known high school located in the vibrant town of Velenje, Slovenia. The school offers a broad range of programs, including natural sciences, social sciences, and humanities, aimed at preparing students for higher education and future careers.\");  echo p(\"The school prides itself on academic excellence, fostering intellectual curiosity, and personal development. With a focus on modern teaching methods and a dynamic learning environment, students receive quality education tailored to their individual needs.\");  echo h2(\"International Opportunities\");  echo p(\"Gimnazija Velenje is recognized for its international partnerships and exchange programs, allowing students to connect with peers across Europe. These programs offer students the chance to broaden their perspectives and engage in cross-cultural learning experiences.\");  echo h3(\"Extracurricular Activities\");  echo p(\"Beyond academics, the school encourages participation in extracurricular activities. Students can explore their interests in a variety of clubs, including debating, science, sports, and arts. These activities help build teamwork, creativity, and leadership skills.\");  echo p(\"Graduates from Gimnazija Velenje are known for their success in higher education and their contributions to various professional fields, making the school a highly respected institution in the region.\");');
 
 -- --------------------------------------------------------
 
@@ -331,7 +356,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `profile_picture_path`, `phone_number`) VALUES
-(6, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Test', 'Tom', NULL, NULL);
+(6, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Test', 'does', '../uploads/6705c784412606kfckitten.png', '');
 
 -- --------------------------------------------------------
 
@@ -347,6 +372,13 @@ CREATE TABLE `users_courses` (
   `untill` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `users_courses`
+--
+
+INSERT INTO `users_courses` (`id`, `course_id`, `user_id`, `from`, `untill`) VALUES
+(1, 2, 6, '2024-10-08 21:07:31', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -360,6 +392,13 @@ CREATE TABLE `users_schools` (
   `from` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `untill` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `users_schools`
+--
+
+INSERT INTO `users_schools` (`id`, `school_id`, `user_id`, `from`, `untill`) VALUES
+(1, 2, 6, '2024-10-08 22:06:58', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -422,7 +461,7 @@ ALTER TABLE `users_schools`
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -434,13 +473,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -452,13 +491,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_courses`
 --
 ALTER TABLE `users_courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users_schools`
 --
 ALTER TABLE `users_schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
