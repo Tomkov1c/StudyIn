@@ -10,6 +10,11 @@
     include "Typography.php";
     include "Display.php";
     include "Divider.php";
+    include "Review.php";
+    include "IconLink.php";
+    include "Notification.php";
+    include "Application.php";
+    include "FilterButton.php";
 ?>
 <link rel="stylesheet" href="../css/global.css">
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">

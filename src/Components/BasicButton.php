@@ -6,7 +6,7 @@ function basicButton($text, $function = null, $fullWidth = false, $additionalCla
                 px-[30px] py-[10px] outline outline-[var(--color-text)] outline-2] 
                 rounded-md shadow-[0px_4px_0px_3px_var(--color-text)] relative top-0 block
                 mx-0.5 font-sans font-medium text-xl";
-    $hover = "shadow-[0px_0px_0px_3px_var(--color-text)] top-1";
+    $hover = "shadow-[0px_0px_0px_3px_var(--color-text)] top-[4px]";
     $click = "bg-[var(--color-primary25)]";
     $animations = "transition-all duration-500 ease-[cubic-bezier(0,1,0,1)]";
 

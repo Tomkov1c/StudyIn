@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyIn</title>
-    <?php include "components/MustInclude.php"; ?>
+    <?php include "components/MustInclude.php";?>
 </head>
 <body class="light bg-[var(--color-background)] w-screen m-0 2xl:px-[125px] xl:px-[80px] lg:px-[50px] px-[25px] py-[75px] flex flex-col gap-[100px]">
 

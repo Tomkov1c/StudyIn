@@ -16,8 +16,10 @@ body.light {
     --color-terciary: #DBE3E9;
     --color-terciary50: #dbe3e9ef;
     --color-accent: #D39BAF;
+    --color-accentclicked: #9b7481;
     --color-text: #0B0F13;
     --color-text25: #0b0f1339;
+    --color-text50: #0b0f1386;
     --color-background: #E6EEF4;
     --color-good: #6CDF89;
     --color-bad: #DF6C6C;
@@ -30,8 +32,10 @@ body.dark {
     --color-terciary: #161E24;
     --color-terciary50: #161E24ef;
     --color-accent: #632C3F;
+    --color-accentclicked: #3a1a25;
     --color-text: #ECF0F4;
     --color-text25: #ECF0F439;
+    --color-text50: #ECF0F486;
     --color-background: #081319;
     --color-good: #429056;
     --color-bad: #9D4747;
