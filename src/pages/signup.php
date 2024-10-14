@@ -12,10 +12,10 @@
         }
         ?>
 </head>
-<body class="light bg-[var(--color-background)] w-screen m-0 px-[125px] flex gap-[100px] h-[100vh]">
-    <form action="../scripts/user_insert.php" method="post" class="w-2/5 items-start gap-[15px] flex flex-col my-auto">
-        <?php echo h2("Sign Up", true, false)?>
-            <div class="flex flex-row gap-2.5">
+<body class="light bg-[var(--color-background)] w-screen m-0 2xl:px-[125px] xl:px-[75px] lg:px-[25px] px-[25px] flex gap-[100px] h-[100vh]">
+    <form action="../scripts/user_insert.php" method="post" class="xl:w-2/5 lg:w-3/5 w-full items-start gap-[15px] flex flex-col my-auto z-10">
+            <?php echo h2("Sign Up", true, false)?>
+            <div class="flex flex-row gap-2.5 w-full">
                 <?php echo basicInputField("Name", "name", "name", true, required: true) ?>
                 <?php echo basicInputField("Surname", "surname", "surname", true, required: true) ?>
             </div>
@@ -24,6 +24,6 @@
             <?php echo basicInputField("Confirm Password", "confpassword", "confpassword", true, required: true, type: "password") ?>
             <?php echo submitButton("Sign Up", fullWidth: true) ?>
     </form>
-    <img class="w-3/5 grow shrink basis-0 my-auto" src="../images/notebook.png" />
+    <img class="2xl:w-3/5 lg:w-2/5 opacity-30 lg:opacity-100 lg:relative absolute grow shrink basis-0 my-auto z-0 object-contain h-full lg:object-fill lg:h-fit" src="../images/notebook.png" />
 </body>
 </html>
