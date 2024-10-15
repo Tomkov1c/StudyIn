@@ -62,7 +62,7 @@ function h3($text, $fullWidth = false, $highlightable = true, $additionalClasses
 
 function h4($text, $fullWidth = false, $highlightable = true, $additionalClasses = null) 
 {
-    $classes = "text-[var(--color-text)] text-[35px] font-semibold font-sans h-fit w-fill";
+    $classes = "text-[var(--color-text)] text-[35px] font-bold font-sans h-fit w-fill";
     $click = "";
     $animations = "";
 
