@@ -143,6 +143,33 @@
                 echo divider(false);
             }
         }
+
+        if (isset($_SESSION['user_id'])) {
+            $queryCheckPrincipal = "SELECT id, name FROM schools WHERE principal_user_id = ?";
+            $stmtCheckPrincipal = $pdo->prepare($queryCheckPrincipal);
+            $stmtCheckPrincipal->execute([$_SESSION['user_id']]);
+            $school = $stmtCheckPrincipal->fetchAll(PDO::FETCH_ASSOC);
+        
+            if ($school) {
+                echo '<a href="../principal/dashboard.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-id-badge"></i></a>';
+                echo divider(false);
+                $_SESSION['principal'] = true;
+            }
+        }
+        // Assuming you have already executed the query and $result is set
+        if ($result && is_array($result) && isset($result['id'])) {
+            if ($result['id'] == 4 || $_SESSION['principal'] == true) {
+                $_SESSION['user_aplicationist'] = true;
+                echo '<a href="../principal/aplications.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-list"></i></a>';
+                echo divider(false);
+            }
+        } else {
+            // Optionally handle the case where the query failed
+            echo "Error: Unable to retrieve user data.";
+        }
+
+        
+        
         
     ?>
     <a href="../scripts/user_logout.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>

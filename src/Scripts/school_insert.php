@@ -3,44 +3,41 @@ session_start();
 include_once "../scripts/database.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Prepare and sanitize form data
-    $name = $_POST['name'] ?? '';
-    $type = $_POST['type'] ?? '';
-    $principal_id = (int) $_POST['principal'] ?? 0;
-    $country = $_POST['country'] ?? '';
-    $city = $_POST['city'] ?? '';
-    $address = $_POST['address'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    $website = $_POST['website'] ?? '';
-    
-    $logo_path = '';
-    $banner_path = '';
-    
-    // Insert data into the database
-    $query = "INSERT INTO `schools` (`name`, `adress`, `city_id`, `website`, `email`, `phone_number`, `principal_user_id`, `logo_path`, `banner_path`, `details_page_content`, `type_id`) 
-              VALUES (:name, :address, (SELECT id FROM cities WHERE name = :city), :website, :email, :phone, :principal, :logo, :banner, '', (SELECT id FROM types WHERE name = :type))";
+    // Retrieve form data and sanitize it
+    $name = trim($_POST['name']);
+    $type_id = (int)$_POST['type'];
+    $teacher_id = (int)$_POST['teacher'];
+    $city_id = (int)$_POST['city'];
+    $address = trim($_POST['address']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $website = trim($_POST['website']);
 
-    $stmt = $pdo->prepare($query);
-    
+    // Basic validation
+    if (empty($name) || empty($address)) {
+        $_SESSION['error'] = "Please fill in all required fields.";
+        header("Location: ../admin/school.php");
+        exit();
+    }
+
+    // Prepare SQL statement
+    $sql = "INSERT INTO schools (name, adress, city_id, website, email, phone_number, principal_user_id, type_id) 
+            VALUES (:name, :address, :city_id, :website, :email, :phone, :teacher_id, :type_id)";
+
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([
         ':name' => $name,
         ':address' => $address,
-        ':city' => $city,
+        ':city_id' => $city_id,
         ':website' => $website,
         ':email' => $email,
         ':phone' => $phone,
-        ':principal' => $principal_id,
-        ':logo' => $logo_path,
-        ':banner' => $banner_path,
-        ':type' => $type
+        ':teacher_id' => $teacher_id,
+        ':type_id' => $type_id
     ]);
 
-    if ($stmt) {
-        echo "School added successfully!";
-        header("Location: success_page.php"); // Redirect to a success page
-    } else {
-        echo "Error adding school.";
-    }
+    $_SESSION['success'] = "School created successfully!";
+    header("Location: ../admin/create_new.php"); // Redirect to the same page or a success page
+    exit();
 }
 ?>

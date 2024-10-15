@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 04:28 AM
+-- Generation Time: Oct 16, 2024 at 01:46 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,13 @@ CREATE TABLE `aplications` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `approved` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `aplications`
+--
+
+INSERT INTO `aplications` (`id`, `from_user_id`, `course_id`, `school_id`, `date`, `approved`) VALUES
+(9, 3, 1, NULL, '2024-10-15 23:33:39', 1);
 
 -- --------------------------------------------------------
 
@@ -323,7 +330,9 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `school_id`, `website`, `logo_path`, `banner_path`, `details_page_content`) VALUES
-(1, 'Tehnik Računalništva', 2, NULL, NULL, NULL, NULL);
+(1, 'Tehnik Računalništva', 2, NULL, NULL, NULL, NULL),
+(2, 'Tehnik Mehatronike', 2, '', NULL, NULL, NULL),
+(3, 'Tehnik Mehatronike', 2, '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -411,6 +420,17 @@ CREATE TABLE `roles` (
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `description`) VALUES
+(1, 'Owner', NULL),
+(2, 'Admin', NULL),
+(3, 'Mod', NULL),
+(4, 'Applicationist', NULL),
+(5, 'Teacher', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -437,7 +457,7 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`id`, `name`, `adress`, `city_id`, `website`, `email`, `phone_number`, `principal_user_id`, `logo_path`, `banner_path`, `details_page_content`, `type_id`) VALUES
-(2, 'Šolski Center Velenje, Elektro in Računalniška Šola', 'Trg Mladosti 3', 1, NULL, NULL, NULL, NULL, NULL, 'https://ers.scv.si/wp-content/uploads/sites/9/2019/01/%C5%A0D_ER%C5%A0-1.jpg', '', 1);
+(2, 'Šolski Center Velenje, Elektro in Računalniška Šola', 'Trg Mladosti 3', 1, '', '', '', 3, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwFukw35-gwnUAUUF8P5s4GhyjdMhx5b4pLA&s', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -479,8 +499,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `role_id`, `profile_picture_path`) VALUES
-(1, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Tom', 'Kliner', NULL, NULL),
-(2, 'jure.primer@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Jure', 'Primer', NULL, NULL);
+(1, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Tom', 'Kliner', 1, NULL),
+(2, 'jure.primer@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Jure', 'Primer', 5, NULL),
+(3, 'simon.muha@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Simon', 'Muha', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -637,7 +658,7 @@ ALTER TABLE `users_schools`
 -- AUTO_INCREMENT for table `aplications`
 --
 ALTER TABLE `aplications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -655,7 +676,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -676,16 +697,22 @@ ALTER TABLE `regions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users_courses`
@@ -697,7 +724,7 @@ ALTER TABLE `users_courses`
 -- AUTO_INCREMENT for table `users_schools`
 --
 ALTER TABLE `users_schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

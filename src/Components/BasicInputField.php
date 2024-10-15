@@ -33,4 +33,5 @@ function basicInputField($placeholder, $id, $name, $fullWidth = false, $addition
     <input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="' . $allClasses . '" placeholder="' . $placeholder . '"' . $value . $required . '>';
 
 }
+
 ?>
