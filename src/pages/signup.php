@@ -26,4 +26,8 @@
     </form>
     <img class="2xl:w-3/5 lg:w-2/5 opacity-30 lg:opacity-100 lg:relative absolute grow shrink basis-0 my-auto z-0 object-contain h-full lg:object-fill lg:h-fit" src="../images/notebook.png" />
 </body>
+
+<div class="w-[82px] transform -translate-y-1/2 h-fit p-[15px] bg-[var(--color-background)] outline outline-[var(--color-text)] outline-[2px] rounded-2xl left-[1%] flex-col justify-start items-center gap-[15px] inline-flex fixed top-1/2">
+    <a href="../../index.php" class="self-stretch h-[52px] bg-[var(--color-secondary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-arrow-left"></i></a>
+</div>
 </html>

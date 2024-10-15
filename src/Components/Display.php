@@ -4,7 +4,7 @@ function display($title, $organizer = null, $year, $image, $additionalClasses = 
     $classes = "w-[500px] min-h-[343px] h-fit p-5 bg-[var(--color-accent)] 
                 rounded-md outline outline-[var(--color-text)] outline-2]
                 shadow-[0px_7px_0px_3px_var(--color-text)] relative top-0 flex-col justify-center items-start gap-2.5 inline-flex";
-    $hover = "shadow-[0px_0px_0px_3px_var(--color-text)] top-[9px]";
+    $hover = "shadow-[0px_0px_0px_3px_var(--color-text)] top-[7px]";
     $click = "bg-[var(--color-accentclicked)]";
     $animations = "transition-all duration-500 ease-[cubic-bezier(0,1,0,1)]";
 

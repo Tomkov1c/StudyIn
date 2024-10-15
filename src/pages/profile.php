@@ -25,7 +25,7 @@
     ?>
     <title><?php echo htmlspecialchars($result['first_name'] . " " . $result['last_name']); ?></title>
 </head>
-<body class="light bg-fixed bg-[var(--color-background)] w-screen m-0 2xl:px-[125px] xl:px-[80px] lg:px-[50px] px-[25px] py-[75px] flex flex-col gap-[50px]">
+<body class="light bg-fixed bg-[var(--color-background)] w-screen m-0 2xl:px-[175px] xl:px-[80px] lg:px-[50px] px-[25px] py-[75px] flex flex-col gap-[50px]">
     <?php if($_SESSION['user_id'] == $_GET['user']){ ?>
             <div class="self-stretch h-fit rounded-md flex-col justify-start items-center gap-[50px] flex">
                 <div class="self-stretch p-[50px] bg-[var(--color-terciary)] rounded-[25px] border-2 border-[var(--color-text)] justify-start items-center gap-10 xl:inline-flex">
@@ -60,7 +60,7 @@
 
                         foreach ($notifications as $notification) {
                             if (is_array($notification)) {
-                                echo notification($notification['title'], $notification['message'], "w-full");
+                                echo notification($notification['title'], $notification['message'], "w-full", $notification['id']);
                             } else {
                                 echo "Error: Invalid notification data format.<br>";
                                 var_dump($notification);
@@ -101,27 +101,20 @@
 
                         $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                        if (!is_array($applications) || count($applications) === 0) {
+                        if (!is_array($applications)) {
                             echo "No applications found.";
-                            exit;
                         }
 
                         foreach ($applications as $application) {
-                            if (!is_null($application['course_id'])) {
-                                $title = $application['course_name'];  // Use course name as title
-                                $href = "course_details.php?course_id=" . $application['course_id'];  // Link to course details page
-                                $image = $application['course_banner_path'];
-                            } else {
-                                $title = $application['school_name'];  // Use school name as title
-                                $href = "school_details.php?school_id=" . $application['school_id'];  // Link to school details page
-                                $image = $application['school_banner_path'];
-                            }
+                            $title = isset($application['course_name']) ? $application['course_name'] : $application['school_name'];
+                            $href = isset($application['course_name']) ? "../pages/details.php?course_=" . $application['course_id'] : "../pages/details.php?school=" . $application['school_id']; 
+                            $image = isset($application['course_banner_path']) ? $application['course_banner_path'] : $application['school_banner_path'];
 
                             $date = $application['date'];
 
                             $status = ($application['approved'] == 1) ? "true" : (($application['approved'] === 0) ? "false" : "pending");
 
-                            echo application($title , $date, $status, $image, "xl:w-[500px] w-full", $href);
+                            echo application($title , $date, $status, $image, "w-full", $href);
                         }
                     ?>   
                 </div>
@@ -205,4 +198,13 @@
         </div>
     <?php } ?>
 </body>
+
+<div class="w-[82px] transform -translate-y-1/2 h-fit p-[15px] bg-[var(--color-background)] outline outline-[var(--color-text)] outline-[2px] rounded-2xl left-[1%] flex-col justify-start items-center gap-[15px] inline-flex fixed top-1/2">
+    <a href="../pages/profile.php?user=<?php echo $_SESSION['user_id'] ?>"><img class="self-stretch h-[52px] rounded-md border-2 border-[var(--color-text)]" src="<?php echo $_SESSION['pfp']; ?>" /></a>
+    <a href="../pages/browse.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="../pages/account-settings.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-gear"></i></a>
+    <?php echo divider(false); ?>
+    <a href="../scripts/user_logout.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>
+</div>
+
 </html>

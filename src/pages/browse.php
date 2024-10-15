@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse</title>
     <?php include "../components/MustInclude.php";
-    include_once "../scripts/database.php"; 
+    include_once "../scripts/database.php";
+    session_start(); 
     ?>
     <link rel="stylesheet" src="../CSS/browse.css">
 </head>
-<body class="light bg-[var(--color-background)] w-screen m-0 flex flex-col gap-[25px] 2xl:px-[125px] xl:px-[80px] lg:px-[50px] px-[25px] py-[75px]">
+<body class="light bg-[var(--color-background)] w-screen m-0 flex flex-col gap-[25px] 2xl:px-[175px] xl:px-[80px] lg:px-[50px] px-[25px] py-[75px]">
     <?php echo h3("Search")?>
     <div class="flex gap-5">
         <?php echo filterButton("Courses", null, null);
@@ -52,7 +53,7 @@
                 }
                 
                 foreach ($results as $course) {
-                    echo display($course['course_name'], $course['school_name'], $course['average_rating'], $course['school_banner'], "course max-w-[400px]");
+                    echo display($course['course_name'], $course['school_name'], '<i class="fa-solid fa-star text-[var(--color-text)] mr-1"></i>' . (int)$course['average_rating'], $course['school_banner'], "course max-w-[33%]");
                 }
 
             
@@ -96,14 +97,15 @@
                     echo "Doesn't exist";
                     die();
                 }
-                foreach ($results as $school) {
+
+                foreach ($result as $school) {
                     if (is_array($school)) {
                         echo display(
                             $school['school_name'], 
                             $school['city_name'], 
-                            $school['average_rating'],  
-                            $school['school_banner'], 
-                            "school max-w-[400px]"
+                            '<i class="fa-solid fa-star text-[var(--color-text)] mr-1"></i>' . (int)$school['average_rating'],  
+                            $school['school_banner_path'], 
+                            "school max-w-[33%]"
                         );
                     } else {
                         echo "Error: School data is not an array.";
@@ -115,4 +117,16 @@
 
 </body>
 <script src="../scripts/browseFilters.js"></script>
+
+<?php include_once "../scripts/get_pfp.php";?>
+
+<div class="w-[82px] transform -translate-y-1/2 h-fit p-[15px] bg-[var(--color-background)] outline outline-[var(--color-text)] outline-[2px] rounded-2xl left-[1%] flex-col justify-start items-center gap-[15px] inline-flex fixed top-1/2">
+    <a href="../pages/profile.php?user=<?php echo $_SESSION['user_id'] ?>"><img class="self-stretch h-[52px] rounded-md border-2 border-[var(--color-text)]" src="<?php echo $_SESSION['pfp']; ?>" /></a>
+    <a href="../pages/browse.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <a href="../pages/account-settings.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-gear"></i></a>
+    <?php echo divider(false); ?>
+    <a href="../scripts/user_logout.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>
+</div>
+
+
 </html> 

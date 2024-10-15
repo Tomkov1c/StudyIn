@@ -1,5 +1,5 @@
 <?php
-function notification($title, $detail, $additionalClasses = null) 
+function notification($title, $detail, $additionalClasses = null, $id) 
 {
     $classes = "w-[397px] h-fit bg-[var(--color-accent)] rounded-md items-start inline-flex 
                 outline outline-[var(--color-text)] outline-2] p-5 relative top-0 items-start gap-[20px] inline-flex";

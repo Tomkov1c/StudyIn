@@ -147,11 +147,15 @@
             </div>
             <div class="self-stretch justify-start items-start gap-[25px] lg:inline-flex">
                 <div class="grow shrink basis-0 self-stretch w-full py-2.5 flex-col justify-start items-start gap-2.5 inline-flex">
-                    <?php echo h4("About"); 
-                    
+                    <?php 
+                                       
+                    if (isset($schoolDetailsPageContent) && isset($Details)) {
+                        echo h4("About");
+                        echo isset($Details) ? $Details : $schoolDetailsPageContent;
+                    }
+                                    
                     
                     echo divider(false);
-                    echo h4("Ratings"); 
 
                     if(isset($_GET['course'])) {
                         $query = "SELECT r.id AS rating_id,
@@ -175,8 +179,8 @@
                         if (empty($results)) {
                             die("No reviews found.");
                         }
+                        echo h4("Ratings");
 
-                        // Loop through each rating
                         foreach ($results as $course) {
                             echo reviewFromUser(
                                 $course['user_name'] . " " . $course['user_surname'],
