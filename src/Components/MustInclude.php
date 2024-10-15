@@ -1,20 +1,20 @@
 <?php
-    include "SubmitButton.php";
-    include "IconButton.php";
-    include "IndexButton.php";
-    include "FileButton.php";
-    include "BasicButton.php";
-    include "BasicInputField.php";
-    include "Footer.php";
-    include "Header.php";
-    include "Typography.php";
-    include "Display.php";
-    include "Divider.php";
-    include "Review.php";
-    include "IconLink.php";
-    include "Notification.php";
-    include "Application.php";
-    include "FilterButton.php";
+    require_once "SubmitButton.php";
+    require_once "IconButton.php";
+    require_once "IndexButton.php";
+    require_once "FileButton.php";
+    require_once "BasicButton.php";
+    require_once "BasicInputField.php";
+    require_once "Footer.php";
+    require_once "Header.php";
+    require_once "Typography.php";
+    require_once "Display.php";
+    require_once "Divider.php";
+    require_once "Review.php";
+    require_once "IconLink.php";
+    require_once "Notification.php";
+    require_once "Application.php";
+    require_once "FilterButton.php";
 ?>
 <link rel="stylesheet" href="../css/global.css">
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">

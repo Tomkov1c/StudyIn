@@ -1,6 +1,6 @@
 <?php
 
-function submitButton($text, $fullWidth = false, $additionalClasses = "") {
+function submitButton($text, $fullWidth = false, $additionalClasses = "", $value = null) {
 
     $classes = "justify-center items-center gap-[5px] inline-flex bg-[var(--color-primary)] 
                 px-[30px] py-[10px] outline outline-[var(--color-text)] outline-2] 

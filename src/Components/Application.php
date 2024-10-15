@@ -1,7 +1,7 @@
 <?php
 function application($title, $date, $status, $image, $additionalClasses = null, $href) 
 {
-    $classes = "w-[500px] h-[343px] p-5 
+    $classes = "w-[500px] min-h-[343px] h-fit p-5 
                 rounded-md outline outline-[var(--color-text)] outline-2]
                 shadow-[0px_7px_0px_3px_var(--color-text)] relative top-0 flex-col justify-center items-start gap-2.5 inline-flex";
     $hover = "shadow-[0px_0px_0px_3px_var(--color-text)] top-[9px] cursor-pointer";

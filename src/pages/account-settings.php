@@ -24,13 +24,8 @@
 
     ?>
 </head>
-<body class="light bg-[var(--color-background)] overflow-x-hidden w-screen m-0 md:p-[75px] p-[25px] flex gap-[100px]">
-    <div class="lg:flex hidden h-fit fixed lg:w-[20%] w-[0%] p-[25px] bg-[var(--color-terciary)] rounded-md border-2 border-[#0b0f13] flex-col justify-start items-start gap-2.5">
-        <?php echo h5("Table of Contents")?>
-        <?php echo indexButton("Account Information", fullWidth: true, additionalClasses: "my-1") ?>
-        <?php echo indexButton("Miscellaneous", fullWidth: true, additionalClasses: "my-1") ?>
-    </div>
-    <div class=" flex-col lg:w-[75%] w-fill ml-auto mr-0 justify-start items-start gap-5 inline-flex">
+<body class="light bg-[var(--color-background)] overflow-x-hidden w-screen 2xl:px-[125px] xl:px-[80px] lg:px-[50px] px-[25px] py-[75px] flex gap-[100px]">
+    <div class=" flex-col w-full w-fill ml-auto mr-0 justify-start items-start gap-5 inline-flex">
         <?php echo h3("Settings") ?>
         <?php echo p("Adelit quo, vero neque, eos amet totam quae tempora ut quis sed ratione. Eosvel ipsa alias ipsa lorem tempora, natus minima iusto odit ipsum, rem laborum iusto quam ut. Animilibero aut nobis, dolore quae neque, odio tempora vel, ut sunt ut quae, iusto. Etfacilis velit laborum ut qui totam vero facilis alias sed quam nobis odit facilis at. ") ?>
         <?php echo divider() ?>
@@ -55,7 +50,6 @@
         <form action="../scripts/user_update_info.php" method="post" class="gap-[30px] inline-flex flex-col w-full">
             <?php echo basicInputField("Name","name", "name", true, value: $user['first_name']) ?>
             <?php echo basicInputField("Surname","surname", "surname", true, value: $user['last_name']) ?>
-            <?php echo basicInputField("Phone Number","phone", "phone", true, value: $user['phone_number'], type: "tel") ?>
             <?php echo submitButton("Change", fullWidth: true) ?>
         </form>
         <?php echo divider() ?>
