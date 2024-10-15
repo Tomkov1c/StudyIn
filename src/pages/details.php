@@ -126,12 +126,12 @@
 
             
         }
-
-        
-
-        echo "<title>" . "</title>";
-
-
+    ?>
+    <?php 
+    
+    $title = isset($Name) ? $Name : $schoolName;
+    echo "<title>" . $title . "</title>";
+    
     ?>
 </head>
 <body class="light bg-[var(--color-background)] w-screen m-0 flex flex-col gap-[25px] 2xl:px-[125px] xl:px-[80px] lg:px-[50px] px-[25px] xl:py-[75px] py-[25px]">

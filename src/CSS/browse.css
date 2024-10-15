@@ -1,0 +1,13 @@
+[data-search="all"] .school {
+    display: block;
+}
+[data-search="all"] .course {
+    display: block;
+}
+
+[data-search="courses"] .school {
+    display: hidden;
+}
+[data-search="schools"] > .course {
+    display: hidden;
+}

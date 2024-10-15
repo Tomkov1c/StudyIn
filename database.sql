@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2024 at 06:13 PM
+-- Generation Time: Oct 15, 2024 at 04:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,6 +48,13 @@ CREATE TABLE `cities` (
   `post_code` text NOT NULL,
   `region_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `name`, `post_code`, `region_id`) VALUES
+(1, 'Velenje', '3320', 1);
 
 -- --------------------------------------------------------
 
@@ -311,6 +318,13 @@ CREATE TABLE `courses` (
   `details_page_content` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `school_id`, `website`, `logo_path`, `banner_path`, `details_page_content`) VALUES
+(1, 'Tehnik Računalništva', 2, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -336,6 +350,13 @@ CREATE TABLE `notifications` (
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `to_user_id`, `from_user_id`, `title`, `message`) VALUES
+(1, 2, NULL, 'Test', 'Does it work');
+
 -- --------------------------------------------------------
 
 --
@@ -351,6 +372,13 @@ CREATE TABLE `ratings` (
   `school_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `from_user_id`, `rating`, `comment`, `course_id`, `school_id`) VALUES
+(1, 1, 5, 'idk test', 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -363,6 +391,13 @@ CREATE TABLE `regions` (
   `country_id` int(11) NOT NULL,
   `no_regions` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `regions`
+--
+
+INSERT INTO `regions` (`id`, `name`, `country_id`, `no_regions`) VALUES
+(1, 'Štajarska', 187, 1);
 
 -- --------------------------------------------------------
 
@@ -397,6 +432,13 @@ CREATE TABLE `schools` (
   `type_id` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Dumping data for table `schools`
+--
+
+INSERT INTO `schools` (`id`, `name`, `adress`, `city_id`, `website`, `email`, `phone_number`, `principal_user_id`, `logo_path`, `banner_path`, `details_page_content`, `type_id`) VALUES
+(2, 'Šolski Center Velenje, Elektro in Računalniška Šola', 'Trg Mladosti 3', 1, NULL, NULL, NULL, NULL, NULL, 'https://ers.scv.si/wp-content/uploads/sites/9/2019/01/%C5%A0D_ER%C5%A0-1.jpg', '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -408,6 +450,13 @@ CREATE TABLE `types` (
   `name` text NOT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `types`
+--
+
+INSERT INTO `types` (`id`, `name`, `description`) VALUES
+(1, 'High School', NULL);
 
 -- --------------------------------------------------------
 
@@ -430,7 +479,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `role_id`, `profile_picture_path`) VALUES
-(0, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Tom', 'Kliner', NULL, NULL);
+(1, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Tom', 'Kliner', NULL, NULL),
+(2, 'jure.primer@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Jure', 'Primer', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -446,6 +496,14 @@ CREATE TABLE `users_courses` (
   `untill` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ending_id` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `users_courses`
+--
+
+INSERT INTO `users_courses` (`id`, `course_id`, `user_id`, `from`, `untill`, `ending_id`) VALUES
+(1, 1, 1, '2024-10-14 21:13:33', '0000-00-00 00:00:00', NULL),
+(2, 1, 1, '2024-10-14 21:14:10', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -472,7 +530,8 @@ CREATE TABLE `users_schools` (
 ALTER TABLE `aplications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `from_user_id` (`from_user_id`),
-  ADD KEY `school_id` (`school_id`);
+  ADD KEY `school_id` (`school_id`),
+  ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `cities`
@@ -571,6 +630,76 @@ ALTER TABLE `users_schools`
   ADD KEY `ending_id` (`ending_id`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `aplications`
+--
+ALTER TABLE `aplications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `regions`
+--
+ALTER TABLE `regions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `schools`
+--
+ALTER TABLE `schools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users_courses`
+--
+ALTER TABLE `users_courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users_schools`
+--
+ALTER TABLE `users_schools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -580,7 +709,7 @@ ALTER TABLE `users_schools`
 ALTER TABLE `aplications`
   ADD CONSTRAINT `aplications_ibfk_1` FOREIGN KEY (`from_user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `aplications_ibfk_2` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`),
-  ADD CONSTRAINT `aplications_ibfk_3` FOREIGN KEY (`id`) REFERENCES `courses` (`id`);
+  ADD CONSTRAINT `aplications_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
 -- Constraints for table `cities`

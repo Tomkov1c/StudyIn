@@ -1,0 +1,7 @@
+function hideSchools() {
+
+}
+
+function hideCourses() {
+    
+}
