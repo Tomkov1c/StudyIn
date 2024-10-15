@@ -52,27 +52,6 @@
             <?php echo basicInputField("Surname","surname", "surname", true, value: $user['last_name']) ?>
             <?php echo submitButton("Change", fullWidth: true) ?>
         </form>
-        <?php echo divider() ?>
-
-        <?php echo h5("Change Email") ?>
-        <?php echo basicInputField("New Email","email", "email", true) ?>
-        <?php echo basicInputField("Password","epassword", "epassword", true) ?>
-        <?php echo basicButton("Change", fullWidth: true) ?>
-        <?php echo divider() ?>
-
-        <?php echo h5("Change Password") ?>
-        <?php echo basicInputField("New Password","newpassword", "newpassword", true) ?>
-        <?php echo basicInputField("Old Password","Password", "Password", true) ?>
-        <?php echo basicButton("Change", fullWidth: true) ?>
-        <?php echo divider() ?>
-        <?php echo divider() ?>
-
-        <?php echo h4("Miscellaneous") ?>
-        <?php echo divider(true) ?>
-        <?php echo divider() ?>
-        <?php echo h5("Delete Account") ?>
-        <?php echo basicInputField("Password","Password", "Password", true) ?>
-        <?php echo basicButton("Delete Account", fullWidth: true, additionalClasses: "bg-[var(--color-bad)]") ?>
     </div>
 </body>
 <script src="../scripts/fileInput.js"></script>

@@ -16,7 +16,7 @@
         <?php echo filterButton("Courses", null, null);
                 echo filterButton("School", null, null)?>
     </div>
-    <?php echo basicInputField("Search", null, null, null); ?>
+    <!-- <?php echo basicInputField("Search", null, null, null); ?> -->
     <div class="flex-wrap gap-5 flex w-full" data-search="schools">
         <?php
                 $query = "SELECT DISTINCT
@@ -53,8 +53,13 @@
                 }
                 
                 foreach ($results as $course) {
-                    echo display($course['course_name'], $course['school_name'], '<i class="fa-solid fa-star text-[var(--color-text)] mr-1"></i>' . (int)$course['average_rating'], $course['school_banner'], "course max-w-[33%]");
-                }
+                    echo display(
+                        $course['course_name'], 
+                        $course['school_name'], '<i class="fa-solid fa-star text-[var(--color-text)] mr-1"></i>' . (int)$course['average_rating'], 
+                        $course['school_banner'], 
+                        "course max-w-[33%]",
+                        "../pages/details.php?course=" . $course['course_id']
+                    );}
 
             
                 $query = "SELECT
@@ -105,7 +110,8 @@
                             $school['city_name'], 
                             '<i class="fa-solid fa-star text-[var(--color-text)] mr-1"></i>' . (int)$school['average_rating'],  
                             $school['school_banner_path'], 
-                            "school max-w-[33%]"
+                            "school max-w-[33%]",
+                            "../pages/details.php?school=" . $school['school_id']
                         );
                     } else {
                         echo "Error: School data is not an array.";
@@ -124,8 +130,23 @@
     <a href="../pages/profile.php?user=<?php echo $_SESSION['user_id'] ?>"><img class="self-stretch h-[52px] rounded-md border-2 border-[var(--color-text)]" src="<?php echo $_SESSION['pfp']; ?>" /></a>
     <a href="../pages/browse.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-magnifying-glass"></i></a>
     <a href="../pages/account-settings.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-gear"></i></a>
-    <?php echo divider(false); ?>
+    <?php echo divider(false); 
+        
+        $query = "SELECT r.name AS name FROM users u INNER JOIN roles r ON r.id = u.role_id WHERE u.id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$_SESSION['user_id']]);
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result != null) {
+            if($result['name'] == "Owner" || $result['name'] == "Admin" || $result['name'] == "Mod" || $result['name'] != null) {
+                echo '<a href="../admin/dashboard.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-user-tie"></i></a>';
+                echo divider(false);
+            }
+        }
+        
+    ?>
     <a href="../scripts/user_logout.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>
+
 </div>
 
 

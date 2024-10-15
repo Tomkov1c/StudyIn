@@ -142,7 +142,7 @@
                 <?php 
                 echo h4(isset($Name) ? $Name : $schoolName);
                 echo divider( true);
-                echo h6(isset($schoolType) ? $schoolType : $schoolName);
+                echo h6(isset($_GET['school']) ? $schoolType : $schoolName);
                 ?>
             </div>
             <div class="self-stretch justify-start items-start gap-[25px] lg:inline-flex">

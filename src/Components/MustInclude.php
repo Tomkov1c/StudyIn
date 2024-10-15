@@ -15,6 +15,7 @@
     require_once "Notification.php";
     require_once "Application.php";
     require_once "FilterButton.php";
+    require_once "SelectBox.php";
 ?>
 <link rel="stylesheet" href="../css/global.css">
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">

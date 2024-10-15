@@ -32,12 +32,7 @@
                     <div class="flex gap-10 w-full mb-10 xl:mb-0">
                         <img class="w-[179px] h-[179px] rounded-[96px] border-2 border-[var(--color-text)]" src="<?php echo $pfp ?>" />
                         <?php echo h3(htmlspecialchars($result['first_name'] . " " . $result['last_name']), true, additionalClasses: "my-auto") ?>
-                    </div>
-                    <div class="xl:flex xl:gap-10 block">
-                        <?php echo basicButton("Settings", additionalClasses: "w-full xl:w-fit mb-7 xl:mb-0", href: "../pages/account-settings.php"); ?>
-                        <?php echo iconButton("fa-solid fa-right-from-bracket", href: "../scripts/user_logout.php", additionalClasses: "w-full xl:w-fit"); ?>
-                    </div>
-                    
+                    </div>                  
                 </div>
             </div>
             <div class="self-stretch justify-start items-start gap-[50px] xl:inline-flex">
@@ -149,7 +144,7 @@
                 <?php echo h4("History"); ?> 
                 <div class="self-stretch justify-start items-start gap-5 inline-flex">
                     <?php 
-                        echo display("erš", "idk", "dshfsh", "dsfsdf")
+                        
                     ?>
                 </div>
             </div>
@@ -174,21 +169,17 @@
                             r.from_user_id = ?
                     ";
                     
-                    // Prepare and execute the statement
                     $stmt = $pdo->prepare($query);
                     $stmt->execute([$_GET['user']]);
                     
-                    // Fetch all results
                     $ratings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     
-                    // Loop through the results and display each review
                     foreach ($ratings as $rating) {
                         $schoolName = htmlspecialchars($rating['school_name']);
-                        $schoolLogo = htmlspecialchars($rating['school_logo']); // Ensure you have the logo URL
+                        $schoolLogo = htmlspecialchars($rating['school_logo']);
                         $reviewRating = htmlspecialchars($rating['rating']);
                         $reviewComment = htmlspecialchars($rating['comment']);
                     
-                        // Call the function to generate the HTML
                         echo reviewForSchool($schoolName, $reviewRating, $reviewComment, $schoolLogo, null, $rating['school_id']);
                     }
                     
