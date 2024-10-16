@@ -25,3 +25,8 @@
 
 ## Features
 
+## Todo
+ * Navigation
+ * Hosting
+ * Polish
+ * Data

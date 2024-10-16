@@ -132,13 +132,13 @@
     <a href="../pages/account-settings.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-gear"></i></a>
     <?php echo divider(false); 
         
-        $query = "SELECT r.name AS name FROM users u INNER JOIN roles r ON r.id = u.role_id WHERE u.id = ?";
+        $query = "SELECT r.name AS name, r.id AS id FROM users u INNER JOIN roles r ON r.id = u.role_id WHERE u.id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$_SESSION['user_id']]);
     
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result != null) {
-            if($result['name'] == "Owner" || $result['name'] == "Admin" || $result['name'] == "Mod" || $result['name'] != null) {
+            if(($result['name'] == "Owner" || $result['name'] == "Admin" || $result['name'] == "Mod") && $result['name'] != null) {
                 echo '<a href="../admin/dashboard.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-user-tie"></i></a>';
                 echo divider(false);
             }
@@ -152,23 +152,17 @@
         
             if ($school) {
                 echo '<a href="../principal/dashboard.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-id-badge"></i></a>';
-                echo divider(false);
                 $_SESSION['principal'] = true;
-            }
-        }
-        // Assuming you have already executed the query and $result is set
-        if ($result && is_array($result) && isset($result['id'])) {
-            if ($result['id'] == 4 || $_SESSION['principal'] == true) {
                 $_SESSION['user_aplicationist'] = true;
                 echo '<a href="../principal/aplications.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-list"></i></a>';
                 echo divider(false);
             }
-        } else {
-            // Optionally handle the case where the query failed
-            echo "Error: Unable to retrieve user data.";
+            if ($result['id'] == 4) {
+                $_SESSION['user_aplicationist'] = true;
+                echo '<a href="../principal/aplications.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-list"></i></a>';
+                echo divider(false);
+            }
         }
-
-        
         
         
     ?>

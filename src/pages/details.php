@@ -197,7 +197,7 @@
                 </div>
                 <div class="md:min-w-[250px] md:w-fit md:max-w-[350px] mt-[25px] md:mt-[0px] w-full p-[30px] bg-[#dbe3e9] rounded-[25px] border-2 border-[#0b0f13] flex-col justify-start items-start gap-2.5 flex">
                     <?php 
-                        echo '<img class="w-[140px] mx-auto h-[140px] rounded-[25px] border-2 border-[#0b0f13]" src="' . isset($LogoPath) ? $LogoPath : $schoolLogoPath . '" />';
+                        echo '<img class="w-[140px] mx-auto h-[140px] rounded-[25px] border-2 border-[#0b0f13]" src="' . (isset($LogoPath) ? $LogoPath : $schoolLogoPath) . '" />';
                         echo divider(false);
 
                         echo h5("Info");
@@ -205,8 +205,8 @@
                         echo isset($Website) ? iconLink("Website", "fa-solid fa-globe", null, $Website) : "";
                         echo isset($cityName) ? iconLink($cityName, "fa-solid fa-location-dot", null) : "";
                         echo isset($countryName) ? iconLink($countryName, "fa-solid fa-flag", null) : "";
-                        echo isset($schoolEmail) ? iconLink($schoolEmail, "fa-solid fa-flag", null) : "";
-                        echo isset($schoolPhoneNumber) ? iconLink($schoolPhoneNumber, "fa-solid fa-flag", null) : "";
+                        echo isset($schoolEmail) && $schoolEmail != null ? iconLink($schoolEmail, "fa-solid fa-envelope", null) : "";
+                        echo isset($schoolPhoneNumber) && $schoolPhoneNumber != null ? iconLink($schoolPhoneNumber, "fa-solid fa-phone", null) : "";
                         
                         
                         echo divider(false);
