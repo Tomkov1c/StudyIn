@@ -30,6 +30,7 @@ function principalHeader() {
                     <a href="school.php" class=" h-[52px] min-w-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-pen"></i></a>
                     <a href="promotion.php" class=" h-[52px] min-w-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-hand-point-up"></i></a>
                     <a href="add_users.php" class=" h-[52px] min-w-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-users"></i></a>
+                    <a href="aplications.php" class=" h-[52px] min-w-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-newspaper"></i></a>
                     ' . divider(false). '
                     <a href="../pages/browse.php" class=" h-[52px] min-w-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-arrow-left"></i></a>
                 </div>';

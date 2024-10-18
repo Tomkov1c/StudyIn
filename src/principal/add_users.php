@@ -43,7 +43,7 @@
                 JOIN roles r ON u.role_id = r.id
                 LEFT JOIN users_schools us ON u.id = us.user_id AND us.school_id = ?
                 WHERE r.name = 'Teacher'
-                AND (us.school_id IS NULL OR us.untill != '0000-00-00 00:00:00')
+                AND (us.school_id IS NULL OR us.untill != '0000-00-00 00:00:00') AND (u.id != " . $_SESSION["user_id"] . ")
             ";
             $stmtTeachers = $pdo->prepare($queryTeachers);
             $stmtTeachers->execute([$school_id]);
@@ -56,13 +56,12 @@
                     echo '<option value="' . $teacher['id'] . '">' . htmlspecialchars($teacher['first_name'] . ' ' . $teacher['last_name']) . '</option>';
                 }
                 echo '</select>';
+                echo divider(false);
+                echo submitButton("Add Teacher");
             } else {
                 echo p("No available teachers to assign to your school.");
             }
         ?>
-
-        <?php echo divider(false); ?>
-        <?php echo submitButton("Add Teacher"); ?>
     </form>
 </body>
 <?php echo principalHeader(); ?>

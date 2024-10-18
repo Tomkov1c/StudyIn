@@ -153,8 +153,6 @@
             if ($school) {
                 echo '<a href="../principal/dashboard.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-id-badge"></i></a>';
                 $_SESSION['principal'] = true;
-                $_SESSION['user_aplicationist'] = true;
-                echo '<a href="../principal/aplications.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-list"></i></a>';
                 echo divider(false);
             }
             if ($result['id'] == 4) {

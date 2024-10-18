@@ -10,8 +10,8 @@
         include_once "../scripts/get_pfp.php";
 
         // Redirect if not logged in as principal
-        if (!isset($_SESSION['principal']) || !isset($_SESSION['user_aplicationist'])) {
-            header("Location: ../pages/login.php");
+        if (!isset($_SESSION['user_role']) && ($_SESSION['user_role'] != 4 || $_SESSION['user_role'] != 5)) {
+            header("Location: ../pages/browse.php");
             exit();
         }
     ?>

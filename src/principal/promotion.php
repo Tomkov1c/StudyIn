@@ -16,7 +16,7 @@
     <title>User Promotion</title>
 </head>
 <body class="light bg-fixed bg-[var(--color-background)] w-screen h-fit m-0 2xl:px-[175px] xl:px-[80px] lg:px-[50px] px-[25px] xl:py-[75px] py-[100px] flex flex-col gap-[20px]">
-    <form action="../Scripts/course_insert.php" method="post" class="h-fit gap-[20px] flex flex-col">
+    <form action="../Scripts/principal_promotion.php" method="post" class="h-fit gap-[20px] flex flex-col">
         <?php 
             echo h3("User Promotion");
             echo p("Give higher privileges to users");
@@ -47,7 +47,7 @@
                     FROM users u
                     JOIN roles r ON u.role_id = r.id
                     JOIN users_schools us ON u.id = us.user_id
-                    WHERE r.name = 'Teacher'
+                    WHERE r.name = 'Teacher' or r.name = 'Applicationist'
                     AND us.school_id = ?  -- Use the retrieved school_id
                     AND us.untill = '0000-00-00 00:00:00'  -- Only select teachers with no expiration in users_schools
                 ";
