@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "../components/MustInclude.php"; 
         include "../scripts/database.php";
+        session_start();
         
         $Id = null;
         $courseId = null;
@@ -142,7 +143,6 @@
                 <?php 
                 echo h4(isset($Name) ? $Name : $schoolName);
                 echo divider( true);
-                echo h6(isset($_GET['school']) ? $schoolType : $schoolName);
                 ?>
             </div>
             <div class="self-stretch justify-start items-start gap-[25px] lg:inline-flex">
@@ -179,17 +179,17 @@
                         if (empty($results)) {
                             die("No reviews found.");
                         }
-                        echo h4("Ratings");
-
-                        foreach ($results as $course) {
-                            echo reviewFromUser(
-                                $course['user_name'] . " " . $course['user_surname'],
-                                $course['rating_rating'],                            
-                                $course['rating_comment'],                            
-                                isset($course['user_pfp']) ? $course['user_pfp'] : "../images/default_pfp.png"  ,
-                                additionalClasses:"w-full"                 
-                            );
-                        }
+//                         echo h4("Ratings");
+// 
+//                         foreach ($results as $course) {
+//                             echo reviewFromUser(
+//                                 $course['user_name'] . " " . $course['user_surname'],
+//                                 $course['rating_rating'],                            
+//                                 $course['rating_comment'],                            
+//                                 isset($course['user_pfp']) ? $course['user_pfp'] : "../images/default_pfp.png"  ,
+//                                 additionalClasses:"w-full"                 
+//                             );
+//                         }
 
                     }
                     echo divider(false);
@@ -231,18 +231,22 @@
 
                         }else {
                             echo iconLink($schoolName, "fa-solid fa-school", "w-full truncate", "../pages/details.php?school=" . $SchoolId);
-                        }
-
-                        echo divider(false);
-                    
+                            echo divider(false);
+                        ?>
+                            <form method="post" action="../scripts/<?php echo isset($_GET['school']) ? "school_application_send.php" : "course_application_send.php" ?>" class="block w-full">
+                                <input type="hidden" id="to" name="to" value="<?php echo isset($_GET['school']) ? $_GET['school'] : $_GET['course']; ?>" >
+                                <?php echo submitButton("Apply", false, "w-full"); ?>
+                            </form>
+                        <?php
+                        
+                        
+                        }                        
                     ?>
-                    <form method="post" action="../scripts/<?php echo isset($_GET['school']) ? "school_application_send.php" : "course_application_send.php" ?>" class="block w-full">
-                        <input type="hidden" id="to" name="to" value="<?php echo isset($_GET['school']) ? $_GET['school'] : $_GET['course']; ?>" >
-                        <?php echo submitButton("Apply", false, "w-full"); ?>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<?php echo userHeader(true, true, true, false, "../pages/browse.php", false, false, false)?>
+
 </html> 

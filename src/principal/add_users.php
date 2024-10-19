@@ -9,7 +9,7 @@
         include_once "../scripts/database.php";
 
         // Redirect to login if the user is not logged in as principal
-        if (!isset($_SESSION['principal'])) {
+        if (!isset($_SESSION['user.isPrincipal'])) {
             header("Location: ../pages/login.php");
             exit();
         }

@@ -10,7 +10,7 @@
         include_once "../scripts/get_pfp.php";
 
         // Redirect if not logged in as principal
-        if (!isset($_SESSION['user_role']) && ($_SESSION['user_role'] != 4 || $_SESSION['user_role'] != 5)) {
+        if ($_SESSION['user_role'] != 4 && $_SESSION['user.isPrincipal'] == false) {
             header("Location: ../pages/browse.php");
             exit();
         }
@@ -33,8 +33,14 @@
             if ($school) {
                 $school_id = $school['id'];
             } else {
-                echo "Error: No school found for the current user.";
-                exit();
+                $querySchool = "SELECT school_id FROM users_schools WHERE user_id = ?";
+                $stmtSchool = $pdo->prepare($querySchool);
+                $stmtSchool->execute([$_SESSION['user_id']]);
+                $school = $stmtSchool->fetch(PDO::FETCH_ASSOC);
+
+                if ($school) {
+                    $school_id = $school['school_id'];
+                }
             }
 
             // Step 2: Fetch applications where the course belongs to the current school and applications are pending approval
@@ -75,5 +81,12 @@
         ?>
     </form>
 </body>
-<?php echo principalHeader(); ?>
+<?php 
+if ($_SESSION['user.isPrincipal'] != false) {
+    echo principalHeader();
+} else {
+    echo userHeader(true, true, true, false, "../pages/browse.php", true, true, true);
+}
+?>
+
 </html>

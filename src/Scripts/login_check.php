@@ -20,21 +20,17 @@ if (!empty($email) && !empty($pass)) {
             $_SESSION['user_surname'] = $user['last_name'];
             $_SESSION['user_role'] = $user['role_id'];
 
-            if ($user['role_id'] == 'Principal') {
-                $queryPrincipal = "SELECT id FROM schools WHERE principal_user_id = ?";
-                $stmtPrincipal = $pdo->prepare($queryPrincipal);
-                $stmtPrincipal->execute([$user['id']]);
-                
-                if ($stmtPrincipal->rowCount() == 1) {
-                    $school = $stmtPrincipal->fetch();
-                    $_SESSION['user.isPrincipal'] = $school['id'];
-                } else {
-                    $_SESSION['user.isPrincipal'] = false;
-                }
+            $queryPrincipal = "SELECT id FROM schools WHERE principal_user_id = ?";
+            $stmtPrincipal = $pdo->prepare($queryPrincipal);
+            $stmtPrincipal->execute([$user['id']]);
+            
+            if ($stmtPrincipal->rowCount() == 1) {
+                $school = $stmtPrincipal->fetch();
+                $_SESSION['user.isPrincipal'] = $school['id'];
             } else {
                 $_SESSION['user.isPrincipal'] = false;
             }
-            $_SESSION['user.isPrincipal'] = $user['role_id'];
+            
             header("Location: ../pages/browse.php");
             die();
         }

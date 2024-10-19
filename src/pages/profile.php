@@ -9,6 +9,8 @@
         if (isset($_GET['user'])) {
             session_start();
             include_once "../scripts/database.php";
+            include_once "../classes/school.php";
+            include_once "../classes/course.php";
 
             $query = "SELECT * FROM users WHERE id = ?";
             $stmt = $pdo->prepare($query);
@@ -36,7 +38,7 @@
                 </div>
             </div>
             <div class="self-stretch justify-start items-start gap-[50px] xl:inline-flex">
-                <div class="w-full grow shrink basis-0 p-[50px] bg-[var(--color-terciary)] rounded-[25px] border-2 border-[var(--color-text)] mb-[50px] xl:mb-[0px] flex-col justify-start items-start gap-2.5 inline-flex">
+                <!-- <div class="w-full grow shrink basis-0 p-[50px] bg-[var(--color-terciary)] rounded-[25px] border-2 border-[var(--color-text)] mb-[50px] xl:mb-[0px] flex-col justify-start items-start gap-2.5 inline-flex">
                     <?php 
                         echo h4("Notifications");
                         echo divider(false);
@@ -63,7 +65,7 @@
                         }
                     
                     ?>                    
-                </div>
+                </div> -->
                 <div class="w-full grow shrink basis-0 p-[50px] bg-[var(--color-terciary)] rounded-[25px] border-2 border-[var(--color-text)] flex-col justify-start items-start gap-2.5 inline-flex">
                     <?php 
                         echo h4("Application");
@@ -118,17 +120,67 @@
                 <?php 
                     echo h4("History");
                     echo divider(false);
-                
-                ?>   
+                   ?>     
+                    <?php 
+                        $query = "SELECT DISTINCT s.id AS school_id
+                                    FROM users u
+                                    JOIN users_schools us ON u.id = us.user_id
+                                    JOIN schools s ON us.school_id = s.id
+                                    WHERE (u.role_id = 4 OR u.role_id = 5) AND u.id = ?";
+              
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$_GET['user']]);
+                        $schools = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        if ($schools != null) {
+                            foreach ($schools as $school) {
+                                $schoolInfo = new School($school['school_id']);
+                                $schoolData = $schoolInfo->getSchoolData($pdo);
+                            
+                                // Check if course data is available before displaying it
+                                if ($schoolData) {
+                                    // Use the display function (assuming it expects course name as argument)
+                                    echo display($schoolData->name, $schoolData->city['name'], null, $schoolData->banner_path, "lg:max-w-[calc((100%-2.5rem)/3)] lg:w-full w-full", "../pages/details.php?school=" . $school['school_id']);
+                                }
+                            }
+                        }
+
+
+
+
+                        $query = "SELECT DISTINCT c.id AS course_id
+                                FROM users u
+                                JOIN users_courses uc ON u.id = uc.user_id
+                                JOIN courses c ON uc.course_id = c.id
+                                WHERE u.role_id IS NULL AND u.id = ?";
+
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$_GET['user']]);
+                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        if ($results != null) {
+                            foreach ($results as $course) {
+                                $courseInfo = new Course($course['course_id']); // Use course_id from the results
+                                $courseData = $courseInfo->getCourseData($pdo);
+                            
+                                // Check if course data is available before displaying it
+                                if ($courseData) {
+                                    // Use the display function (assuming it expects course name as argument)
+                                    echo display($courseData->name, $courseData->school->name, null, isset($courseData->banner_path) ? $courseData->banner_path : $courseData->school->banner_path, "lg:max-w-[calc((100%-2.5rem)/3)] lg:w-full w-full", "../pages/details.php?course=" . $course['course_id']);
+                                }
+                            }
+                        }
+
+                    ?>
             </div>
-            <div class="w-full self-stretch h-fit p-[50px] bg-[var(--color-terciary)] rounded-[25px] border-2 border-[var(--color-text)] flex-col justify-center items-start gap-5 flex">
+            <!-- <div class="w-full self-stretch h-fit p-[50px] bg-[var(--color-terciary)] rounded-[25px] border-2 border-[var(--color-text)] flex-col justify-center items-start gap-5 flex">
                 <?php 
                     echo h4("Reviews");
                     echo divider(false);
                     
                     
                 ?> 
-            </div>
+            </div> -->
     <?php } else { ?>
         <div class="self-stretch h-fit rounded-md flex-col justify-start items-center gap-[90px] flex">
             <div class="self-stretch h-fit justify-start items-center gap-10 inline-flex">
@@ -136,7 +188,6 @@
                 <div class="grow shrink basis-0 self-stretch flex-col justify-center items-start gap-2.5 inline-flex">
                     <div class="self-stretch justify-start items-center gap-2.5">
                         <?php echo h3(htmlspecialchars($result['first_name'] . " " . $result['last_name']), true) ?>
-                        <div class="grow shrink basis-0 text-[var(--color-text50)] text-xl font-semibold font-['Lexend Deca'] leading-tight">Nisiculpa et dolor modi alias ipsa culpa qui ea ratione vitae.</div>
                     </div>
                 </div>
             </div>
@@ -144,11 +195,64 @@
                 <?php echo h4("History"); ?> 
                 <div class="self-stretch justify-start items-start gap-5 inline-flex">
                     <?php 
+                        $query = "SELECT DISTINCT s.id AS school_id
+                                    FROM users u
+                                    JOIN users_schools us ON u.id = us.user_id
+                                    JOIN schools s ON us.school_id = s.id
+                                    WHERE (u.role_id = 4 OR u.role_id = 5) AND u.id = ?";
+              
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$_GET['user']]);
+                        $schools = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         
+                        if ($schools != null) {
+                            foreach ($schools as $school) {
+                                $schoolInfo = new School($school['school_id']);
+                                $schoolData = $schoolInfo->getSchoolData($pdo);
+                            
+                                // Check if course data is available before displaying it
+                                if ($schoolData) {
+                                    // Use the display function (assuming it expects course name as argument)
+                                    echo display($schoolData->name, $schoolData->city['name'], null, null, "lg:max-w-[calc((100%-2.5rem)/3)] lg:w-full w-full", "../pages/details.php?school=" . $school['school_id']);
+                                }
+                            }
+                        }
+
+
+
+
+                        $query = "SELECT DISTINCT c.id AS course_id
+                                FROM users u
+                                JOIN users_courses uc ON u.id = uc.user_id
+                                JOIN courses c ON uc.course_id = c.id
+                                WHERE u.role_id IS NULL AND u.id = ?";
+
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([$_GET['user']]);
+                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        if ($results != null) {
+                            foreach ($results as $course) {
+                                $courseInfo = new Course($course['course_id']); // Use course_id from the results
+                                $courseData = $courseInfo->getCourseData($pdo);
+                            
+                                // Check if course data is available before displaying it
+                                if ($courseData) {
+                                    // Use the display function (assuming it expects course name as argument)
+                                    echo display($courseData->name, $courseData->school->name, null, null, "lg:max-w-[calc((100%-2.5rem)/3)] lg:w-full w-full", "../pages/details.php?course=" . $course['course_id']);
+                                }
+                            }
+                        }
+                        
+                        
+                        if($schools == null && $results == null) {
+                            echo "Nothing to see";
+                        }
+
                     ?>
                 </div>
             </div>
-            <div class="self-stretch h-[329px] flex-col justify-center items-start gap-5 flex">
+            <!-- <div class="self-stretch h-[329px] flex-col justify-center items-start gap-5 flex">
                 <?php echo h4("Reviews"); ?> 
                 <div class="self-stretch justify-start items-start gap-5 inline-flex">
                     <?php 
@@ -185,17 +289,12 @@
                     
                     ?>
                 </div>
-            </div>
+            </div> -->
         </div>
     <?php } ?>
 </body>
 
-<div class="w-[82px] transform -translate-y-1/2 h-fit p-[15px] bg-[var(--color-background)] outline outline-[var(--color-text)] outline-[2px] rounded-2xl left-[1%] flex-col justify-start items-center gap-[15px] inline-flex fixed top-1/2">
-    <a href="../pages/profile.php?user=<?php echo $_SESSION['user_id'] ?>"><img class="self-stretch h-[52px] rounded-md border-2 border-[var(--color-text)]" src="<?php echo $_SESSION['pfp']; ?>" /></a>
-    <a href="../pages/browse.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-magnifying-glass"></i></a>
-    <a href="../pages/account-settings.php" class="self-stretch h-[52px] bg-[var(--color-primary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-gear"></i></a>
-    <?php echo divider(false); ?>
-    <a href="../scripts/user_logout.php" class="self-stretch h-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>
-</div>
+<?php echo userHeader(true, true, true, true, "../pages/browse.php", true, true, true)?>
+
 
 </html>
