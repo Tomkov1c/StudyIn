@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2024 at 01:46 AM
+-- Generation Time: Oct 20, 2024 at 02:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,13 +36,6 @@ CREATE TABLE `aplications` (
   `approved` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
---
--- Dumping data for table `aplications`
---
-
-INSERT INTO `aplications` (`id`, `from_user_id`, `course_id`, `school_id`, `date`, `approved`) VALUES
-(9, 3, 1, NULL, '2024-10-15 23:33:39', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -61,7 +54,10 @@ CREATE TABLE `cities` (
 --
 
 INSERT INTO `cities` (`id`, `name`, `post_code`, `region_id`) VALUES
-(1, 'Velenje', '3320', 1);
+(1, 'Velenje', '3320', 1),
+(2, 'Cambridge', '', 2),
+(3, 'Ljubljana', '1000', 3),
+(4, 'Celje', '', 1);
 
 -- --------------------------------------------------------
 
@@ -330,9 +326,23 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `school_id`, `website`, `logo_path`, `banner_path`, `details_page_content`) VALUES
-(1, 'Tehnik Računalništva', 2, NULL, NULL, NULL, NULL),
-(2, 'Tehnik Mehatronike', 2, '', NULL, NULL, NULL),
-(3, 'Tehnik Mehatronike', 2, '', NULL, NULL, NULL);
+(5, 'Tehnik Računalništva', 5, NULL, NULL, NULL, NULL),
+(6, 'Gimnazijski maturant', 6, NULL, NULL, NULL, NULL),
+(8, 'Harvard Business Analytics Program', 7, 'https://online.hbs.edu/courses/business-analytics/', NULL, NULL, 'The Harvard Business Analytics Program equips professionals with cutting-edge data analytics and business skills.'),
+(9, 'Harvard Law School Program', 7, 'https://hls.harvard.edu/', NULL, NULL, 'The Harvard Law School offers a wide range of law degrees, preparing students to excel in legal practice.'),
+(10, 'Harvard Medical School Program', 7, 'https://meded.hms.harvard.edu/', NULL, NULL, 'Harvard Medical School provides comprehensive medical education, preparing future doctors and medical researchers.'),
+(11, 'Harvard Computer Science Program', 7, 'https://www.seas.harvard.edu/computer-science', NULL, NULL, 'The Harvard Computer Science program focuses on software development, algorithms, and data structures.'),
+(12, 'Harvard Executive Education Program', 7, 'https://www.exed.hbs.edu/', NULL, NULL, 'Harvard Business School’s Executive Education Program helps leaders refine their strategic thinking and management skills.'),
+(13, 'Harvard Graduate School of Education', 7, 'https://www.gse.harvard.edu/', NULL, NULL, 'Harvard Graduate School of Education prepares education leaders, policymakers, and researchers to transform the educational landscape.'),
+(14, 'Harvard Kennedy School of Government', 7, 'https://www.hks.harvard.edu/', NULL, NULL, 'Harvard Kennedy School trains future government and nonprofit leaders to address global policy challenges.'),
+(15, 'Harvard Extension School', 7, 'https://www.extension.harvard.edu/', NULL, NULL, 'Harvard Extension School offers flexible online and on-campus courses and degrees for adult learners.'),
+(16, 'Harvard Divinity School', 7, 'https://hds.harvard.edu/', NULL, NULL, 'Harvard Divinity School educates scholars and leaders in the study of religion, ministry, and theology.'),
+(17, 'Harvard Graduate School of Design', 7, 'https://www.gsd.harvard.edu/', NULL, NULL, 'The Graduate School of Design offers courses in architecture, landscape architecture, and urban planning.'),
+(18, 'Harvard School of Engineering and Applied Sciences', 7, 'https://www.seas.harvard.edu/', NULL, NULL, 'Harvard SEAS focuses on advancing knowledge in engineering, applied sciences, and technology.'),
+(19, 'Harvard T.H. Chan School of Public Health', 7, 'https://www.hsph.harvard.edu/', NULL, NULL, 'The Harvard T.H. Chan School of Public Health aims to educate future leaders in public health and global health issues.'),
+(20, 'Harvard Graduate School of Arts and Sciences', 7, 'https://gsas.harvard.edu/', NULL, NULL, 'Harvard GSAS offers PhD and master’s programs in various disciplines, fostering scholarly research.'),
+(21, 'Harvard Institute of Politics', 7, 'https://iop.harvard.edu/', NULL, NULL, 'The Harvard Institute of Politics engages students in political discourse, leadership, and public service.'),
+(22, 'Harvard Summer School', 7, 'https://summer.harvard.edu/', NULL, NULL, 'Harvard Summer School offers students opportunities to take summer courses on campus and online.');
 
 -- --------------------------------------------------------
 
@@ -359,13 +369,6 @@ CREATE TABLE `notifications` (
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`id`, `to_user_id`, `from_user_id`, `title`, `message`) VALUES
-(1, 2, NULL, 'Test', 'Does it work');
-
 -- --------------------------------------------------------
 
 --
@@ -380,13 +383,6 @@ CREATE TABLE `ratings` (
   `course_id` int(11) DEFAULT NULL,
   `school_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-
---
--- Dumping data for table `ratings`
---
-
-INSERT INTO `ratings` (`id`, `from_user_id`, `rating`, `comment`, `course_id`, `school_id`) VALUES
-(1, 1, 5, 'idk test', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -406,7 +402,9 @@ CREATE TABLE `regions` (
 --
 
 INSERT INTO `regions` (`id`, `name`, `country_id`, `no_regions`) VALUES
-(1, 'Štajarska', 187, 1);
+(1, 'Štajarska', 187, 1),
+(2, 'Massachusetts', 219, 1),
+(3, 'Ljubljana', 187, 1);
 
 -- --------------------------------------------------------
 
@@ -457,7 +455,9 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`id`, `name`, `adress`, `city_id`, `website`, `email`, `phone_number`, `principal_user_id`, `logo_path`, `banner_path`, `details_page_content`, `type_id`) VALUES
-(2, 'Šolski Center Velenje, Elektro in Računalniška Šola', 'Trg Mladosti 3', 1, '', '', '', 3, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwFukw35-gwnUAUUF8P5s4GhyjdMhx5b4pLA&s', '', '', 1);
+(5, 'Šolski center Velenje, Elektro in Računalniška Šola', 'Trg mladosti 3', 1, 'https://ers.scv.si/', 'ers@scv.si', '03 89 60 600', 4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwFukw35-gwnUAUUF8P5s4GhyjdMhx5b4pLA&s', 'https://ers.scv.si/wp-content/uploads/sites/9/2019/01/%C5%A0D_ER%C5%A0-1.jpg', 'Elektro in računalniška šola Velenje (ERŠ Velenje) je ena vodilnih strokovnih in tehniških šol v Sloveniji, specializirana za izobraževanje na področjih elektrotehnike, računalništva in sorodnih tehnologij. Šola je ustanovljena z namenom zagotavljanja praktičnega in teoretičnega znanja, ki dijake pripravi tako za neposredno vključitev v delovno okolje kot za nadaljnje študije na tehničnih fakultetah.  ERŠ Velenje se nahaja v Velenju in je poznana po poudarku na praktičnem usposabljanju, ki ga dopolnjuje temeljita teoretična izobrazba. Šola ponuja različne programe, vključno z elektrotehniko, računalništvom, telekomunikacijami in mehatroniko. Ti programi dijakom omogočajo pridobitev znanj, potrebnih za uspeh v hitro razvijajočih se tehnoloških panogah.  ERŠ Velenje ima tesne stike z lokalnimi in mednarodnimi podjetji, kar omogoča dijakom, da skozi prakso pridobijo dragocene izkušnje. To partnerstvo med šolo in industrijo zagotavlja, da so programi usklajeni s potrebami delodajalcev, kar povečuje zaposljivost dijakov po zaključku šolanja.  Šola je opremljena z najsodobnejšimi laboratoriji in delavnicami, kjer dijaki delajo z najnovejšimi napravami in tehnologijo. ERŠ Velenje spodbuja inovativnost in kreativnost svojih dijakov z udeležbo na nacionalnih in mednarodnih tekmovanjih, kot so tekmovanja iz robotike in programiranja, kjer redno dosegajo odlične rezultate.  Poleg akademskih dejavnosti šola ponuja številne obšolske dejavnosti, vključno s športnimi ekipami, kulturnimi dogodki in različnimi klubi. ERŠ Velenje goji vrednote odgovornosti, sodelovanja in vseživljenjskega učenja ter spodbuja dijake k aktivnemu in odgovornemu življenju v družbi.', 1),
+(6, 'Šolski center Velenje, Gimnazija Velenje', 'Trg mladosti 3', 1, 'https://gimnazija.scv.si/', 'gimnazija@scv.si', '03 89 60 600', 8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhm467-eaLpb7gsgfvH7e6GtyrUvXXFdO2Ng&s', 'https://evropskasredstva.si/app/uploads/2024/07/Solski-center-Velenje-gimnazija.jpg', 'Gimnazija Velenje je ena najuglednejših srednjih šol v Sloveniji, ki nudi visoko kakovostno izobrazbo in dijake pripravlja na nadaljnje izobraževanje ter spodbuja njihovo radovednost, kritično razmišljanje in globalno zavedanje. S svojo dolgoletno tradicijo odličnosti Gimnazija Velenje izstopa kot vodilna institucija na področju splošnega in strokovnega izobraževanja, namenjena celostnemu razvoju dijakov na akademskem, kulturnem in osebnem področju.  Šola ponuja široko paleto izobraževalnih programov, vključno s splošno gimnazijo, kjer se dijaki izobražujejo v naravoslovnih, družboslovnih, jezikovnih in humanističnih vedah. Ta uravnotežen učni načrt dijakom nudi trdne temelje za uspešno nadaljevanje študija na univerzah in kasnejšo kariero, bodisi v Sloveniji bodisi v tujini.  Poleg splošne gimnazije Gimnazija Velenje ponuja tudi specializirane programe, kot so umetniški in športni oddelki, ki omogočajo dijakom, da sledijo svojim interesom in razvijajo svoje talente na najvišji ravni. Šola je znana po živahnem obšolskem življenju, kjer dijaki lahko sodelujejo v kulturnih dejavnostih, šolskih publikacijah, klubih ter se udeležujejo tekmovanj na lokalni in državni ravni.  Pedagoški kader Gimnazije Velenje sestavljajo izkušeni učitelji, ki so predani uspehu svojih dijakov, tako akademsko kot osebnostno. Poudarjajo razvoj kritičnega mišljenja, ustvarjalnosti in samostojnega učenja, hkrati pa zagotavljajo podporno in sodelovalno okolje, kjer dijaki lahko izražajo svoja mnenja in ideje.  Gimnazija Velenje vzdržuje tudi močne mednarodne povezave, kar dijakom omogoča sodelovanje v izmenjavah in projektih s šolami iz Evrope. S tem pridobijo vpogled v druge kulture in perspektive, kar jim omogoča boljše razumevanje sveta ter pripravo na globalne izzive, ki jih čakajo v prihodnosti.  Gimnazija Velenje ni le kraj za pridobivanje znanja, ampak je tudi skupnost, kjer dijaki odkrivajo svoje interese, razvijajo talente in se pripravljajo na odgovorno življenje v sodobni družbi.', 1),
+(7, 'Harvard Univeristy', 'Massachusetts Hall', 2, 'https://www.harvard.edu/', NULL, '617-495-1000', 7, 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Harvard_University_coat_of_arms.svg/800px-Harvard_University_coat_of_arms.svg.png', 'https://2u.com/static/84f4025b19c2bf44a1c9b049994c1eff/ee8ba/baker-library-harvard-university_OPxWuDn.max-2880x1800.jpg', 'Harvard University, established in 1636, is the oldest institution of higher education in the United States and one of the most prestigious universities in the world. Located in Cambridge, Massachusetts, Harvard is known for its deep commitment to academic excellence, groundbreaking research, and global influence. The university is comprised of 13 schools and institutes, including Harvard College, Harvard Law School, Harvard Business School, Harvard Medical School, and the Harvard Graduate School of Education, among others.  Harvard\'s faculty includes distinguished scholars, Nobel laureates, Pulitzer Prize winners, and leaders in various fields. The university is renowned for producing prominent figures in politics, business, science, and the arts, including eight U.S. presidents, numerous foreign heads of state, and countless leaders in every sector of society.  With over 21,000 students enrolled, including undergraduates, graduate students, and professional students, Harvard offers a diverse and vibrant academic environment. Its expansive library system, with more than 20 million volumes, is one of the largest in the world. Harvard is also home to cutting-edge research centers, museums, and institutes that contribute to advances in fields ranging from medicine and public health to business, law, and the humanities.  Harvard\'s mission is to advance new ideas and promote intellectual discovery. The university fosters a commitment to lifelong learning, leadership, and service, shaping future generations to tackle complex global challenges. Through its world-class faculty, diverse student body, and comprehensive resources, Harvard continues to lead the world in education and research.', 2);
 
 -- --------------------------------------------------------
 
@@ -476,7 +476,8 @@ CREATE TABLE `types` (
 --
 
 INSERT INTO `types` (`id`, `name`, `description`) VALUES
-(1, 'High School', NULL);
+(1, 'High School', NULL),
+(2, 'Collidge', NULL);
 
 -- --------------------------------------------------------
 
@@ -500,8 +501,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `role_id`, `profile_picture_path`) VALUES
 (1, 'tom.kliner@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Tom', 'Kliner', 1, NULL),
-(2, 'jure.primer@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Jure', 'Primer', 5, NULL),
-(3, 'simon.muha@scv.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Simon', 'Muha', NULL, NULL);
+(4, 'simov.konecnik@test.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Simon', 'Konečnik', 5, NULL),
+(5, 'jadrank.golcer@test.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Jadranka', 'Golčer', 5, NULL),
+(6, 'simona.diklic@test.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Simona', 'Diklič', 5, NULL),
+(7, 'alan.garber@test.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Alan', 'Garber', NULL, NULL),
+(8, 'gabrijela.fidler@test.si', '2d3da40131ea13e9a7abdd87c293094d22293b68', 'Gabrijela', 'Fidler', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -518,14 +522,6 @@ CREATE TABLE `users_courses` (
   `ending_id` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
---
--- Dumping data for table `users_courses`
---
-
-INSERT INTO `users_courses` (`id`, `course_id`, `user_id`, `from`, `untill`, `ending_id`) VALUES
-(1, 1, 1, '2024-10-14 21:13:33', '0000-00-00 00:00:00', NULL),
-(2, 1, 1, '2024-10-14 21:14:10', '0000-00-00 00:00:00', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -540,6 +536,17 @@ CREATE TABLE `users_schools` (
   `untill` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `ending_id` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Dumping data for table `users_schools`
+--
+
+INSERT INTO `users_schools` (`id`, `school_id`, `user_id`, `from`, `untill`, `ending_id`) VALUES
+(7, 5, 5, '2024-10-20 12:00:46', '0000-00-00 00:00:00', NULL),
+(8, 5, 4, '2024-10-20 12:01:22', '0000-00-00 00:00:00', NULL),
+(9, 5, 6, '2024-10-20 12:01:32', '0000-00-00 00:00:00', NULL),
+(10, 7, 7, '2024-10-20 12:02:04', '0000-00-00 00:00:00', NULL),
+(12, 6, 8, '2024-10-20 12:02:48', '0000-00-00 00:00:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -658,13 +665,13 @@ ALTER TABLE `users_schools`
 -- AUTO_INCREMENT for table `aplications`
 --
 ALTER TABLE `aplications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -676,7 +683,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -694,25 +701,31 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `regions`
 --
 ALTER TABLE `regions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `types`
+--
+ALTER TABLE `types`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users_courses`
@@ -724,7 +737,7 @@ ALTER TABLE `users_courses`
 -- AUTO_INCREMENT for table `users_schools`
 --
 ALTER TABLE `users_schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

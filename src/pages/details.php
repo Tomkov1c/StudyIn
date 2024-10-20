@@ -149,7 +149,7 @@
                 <div class="grow shrink basis-0 self-stretch w-full py-2.5 flex-col justify-start items-start gap-2.5 inline-flex">
                     <?php 
                                        
-                    if (isset($schoolDetailsPageContent) && isset($Details)) {
+                    if (isset($schoolDetailsPageContent) || isset($Details)) {
                         echo h4("About");
                         echo isset($Details) ? $Details : $schoolDetailsPageContent;
                     }
@@ -177,7 +177,7 @@
                         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         if (empty($results)) {
-                            die("No reviews found.");
+                            
                         }
 //                         echo h4("Ratings");
 // 
@@ -197,12 +197,12 @@
                 </div>
                 <div class="md:min-w-[250px] md:w-fit md:max-w-[350px] mt-[25px] md:mt-[0px] w-full p-[30px] bg-[#dbe3e9] rounded-[25px] border-2 border-[#0b0f13] flex-col justify-start items-start gap-2.5 flex">
                     <?php 
-                        echo '<img class="w-[140px] mx-auto h-[140px] rounded-[25px] border-2 border-[#0b0f13]" src="' . (isset($LogoPath) ? $LogoPath : $schoolLogoPath) . '" />';
+                        echo '<img class="w-[140px] mx-auto h-[140px] rounded-[25px] border-2 border-[#0b0f13] bg-[var(--color-secondary)]" src="' . (isset($LogoPath) ? $LogoPath : $schoolLogoPath) . '" />';
                         echo divider(false);
 
                         echo h5("Info");
 
-                        echo isset($Website) ? iconLink("Website", "fa-solid fa-globe", null, $Website) : "";
+                        echo isset($Website) ? iconLink("Website", "fa-solid fa-globe", null, $Website) : iconLink("Website", "fa-solid fa-globe", null, $schoolWebsite);
                         echo isset($cityName) ? iconLink($cityName, "fa-solid fa-location-dot", null) : "";
                         echo isset($countryName) ? iconLink($countryName, "fa-solid fa-flag", null) : "";
                         echo isset($schoolEmail) && $schoolEmail != null ? iconLink($schoolEmail, "fa-solid fa-envelope", null) : "";
@@ -221,13 +221,12 @@
 
                             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                            if (empty($results)) {
-                                die();
+                            if (!empty($results)) {
+                                foreach ($results as $course) {
+                                    echo iconLink($course['name'], "fa-solid fa-book", null, "../pages/details.php?course=" . $course['id']);
+                                }
                             }
 
-                            foreach ($results as $course) {
-                                echo iconLink($course['name'], "fa-solid fa-book", null, "../pages/details.php?course=" . $course['id']);
-                            }
 
                         }else {
                             echo iconLink($schoolName, "fa-solid fa-school", "w-full truncate", "../pages/details.php?school=" . $SchoolId);

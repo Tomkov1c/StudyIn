@@ -9,6 +9,7 @@
     include_once "../classes/course.php";
     include_once "../classes/school.php";
     session_start(); 
+    include_once "../Scripts/login_refresh.php";
     ?>
     <link rel="stylesheet" src="../CSS/browse.css">
 </head>
@@ -40,7 +41,6 @@
                     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     
                     if (empty($results)) {
-                        die("No courses available.");
                     }
                     
                     foreach ($results as $course) {
@@ -62,7 +62,6 @@
 
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     if ($result == null) {
-                        die();
                     }
 
                     foreach ($result as $school) {
@@ -73,7 +72,7 @@
                         // Check if school data is available before displaying it
                         if ($schoolData && isset($schoolData->city['name'])) {
                             // Access the city name as an array element
-                            echo display($schoolData->name, $schoolData->city['name'], null, $schoolData->banner_path, "w-full", "../pages/details.php?school=" . $school['id']);
+                            echo display($schoolData->name, $schoolData->city['name'], $schoolData->city['region']['name'] . ', ' . $schoolData->city['region']['country']['name'], $schoolData->banner_path, "w-full ", "../pages/details.php?school=" . $school['id']);
                         }
                     }
                 }
@@ -83,8 +82,8 @@
                 }else if (isset($_GET['filter']) && $_GET['filter'] == 'schools') {
                     outputSchools($pdo);
                 }else {
-                    outputCourses($pdo);
                     outputSchools($pdo);
+                    outputCourses($pdo);
                 }
 
         ?>
