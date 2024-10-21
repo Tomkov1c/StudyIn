@@ -38,7 +38,7 @@
         </div>
         <div class="self-stretch grow shrink basis-0 justify-start items-center gap-[26px] block lg:inline-flex">
             <div class="grow shrink py-[105px] bg-[var(--color-text)] h-fit rounded-[25px] border-2 border-[var(--color-text)] mb-[26px] lg:mb-0">
-                <h1 class="text-[var(--color-background)] 2xl:text-[64px] xl:text-[48px] lg:text-[44px] text-[64px] font-bold font-sans mt-auto h-fit mx-auto w-fit">Available on GitHub</h1>
+                <h1 class="text-[var(--color-background)] text-center 2xl:text-[64px] xl:text-[48px] lg:text-[44px] text-[64px] font-bold font-sans mt-auto h-fit mx-auto w-fit">Available on GitHub</h1>
                 <h3 class="text-[var(--color-background)] text-[15px] font-normal font-sans mb-auto h-fit mx-auto w-fit">With 1 star and counting</h3>
             </div>
             <div class="w-fill xl:w-[609px] lg:w-[388px] self-stretch py-[105px] bg-[var(--color-accent)] rounded-[25px] border-2 border-[var(--color-text)] mb-[26px] lg:mb-0">
