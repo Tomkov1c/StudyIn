@@ -28,7 +28,7 @@
     <title>Create New Course</title>
 </head>
 <body class="light bg-fixed bg-[var(--color-background)] w-screen h-fit m-0 2xl:px-[175px] xl:px-[80px] lg:px-[50px] px-[25px] xl:py-[75px] py-[100px] flex flex-col gap-[20px]">
-    <form action="../Scripts/course_insert.php" method="post" class="h-fit gap-[20px] flex flex-col">
+    <form action="../scripts/course_insert.php" method="post" class="h-fit gap-[20px] flex flex-col">
         <?php 
             echo h3("New Course");
             echo p("Add a new Course to a School in the database.");

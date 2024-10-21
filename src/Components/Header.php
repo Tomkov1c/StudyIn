@@ -25,7 +25,7 @@ function userHeader($profile = false, $search = false, $settings = false, $logou
     }
 
     if($logout)
-        $output = $output .  divider(false) . '<a title="Log out" href="../Scripts/user_logout.php" class=" h-[52px] min-w-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>';
+        $output = $output .  divider(false) . '<a title="Log out" href="../scripts/user_logout.php" class=" h-[52px] min-w-[52px] bg-[var(--color-bad)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-door-open"></i></a>';
 
     if($goBack != false && $logout == true) {
         $output = $output . '<a title="Go back" href="' . $goBack . '" class=" h-[52px] min-w-[52px] bg-[var(--color-secondary)] rounded-md border-2 border-[var(--color-text)] flex-col justify-center items-center gap-2.5 flex"><i class="fa-solid fa-arrow-left"></i></a>';
